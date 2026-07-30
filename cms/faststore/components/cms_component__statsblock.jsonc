@@ -1,0 +1,59 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "StatsBlock",
+  "$componentTitle": "Stats Block",
+  "title": "Stats Block",
+  "description": "3–4 key statistics displayed in large numbers — ideal for brand content pages",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "title": {
+      "title": "Section label (optional)",
+      "type": "string",
+      "default": ""
+    },
+    "backgroundColor": {
+      "title": "Background color (navy / red / white)",
+      "type": "string",
+      "default": "navy"
+    },
+    "animateCount": {
+      "title": "Animate numbers on scroll",
+      "type": "boolean",
+      "default": true
+    },
+    "stats": {
+      "title": "Statistics",
+      "type": "array",
+      "items": {
+        "title": "Stat",
+        "type": "object",
+        "properties": {
+          "value": {
+            "title": "Number / Value (e.g. 36, 2.5, 75)",
+            "type": "string"
+          },
+          "suffix": {
+            "title": "Suffix (optional, e.g. +, M, %)",
+            "type": "string",
+            "default": ""
+          },
+          "label": {
+            "title": "Label (e.g. Bundesliga titles)",
+            "type": "string"
+          },
+          "valueStyle": {
+            "title": "Number style (bold / italic / normal)",
+            "type": "string",
+            "default": "bold"
+          },
+          "labelStyle": {
+            "title": "Label style (normal / bold / italic)",
+            "type": "string",
+            "default": "normal"
+          }
+        }
+      }
+    }
+  }
+}

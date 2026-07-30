@@ -1,0 +1,127 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+$demo-dark: #003a4d;
+$demo-gold: #ffcb05;
+
+.bannerCarousel {
+  @layer components {
+    @import "@faststore/ui/src/components/molecules/Carousel/styles.scss";
+    @import "@faststore/ui/src/components/atoms/Button/styles.scss";
+    @import "@faststore/ui/src/components/atoms/Icon/styles.scss";
+
+    padding: 0;
+    background-color: #ffffff;
+
+    [data-fs-carousel] {
+      --fs-carousel-padding-mobile: 0;
+      --fs-carousel-padding-desktop: 0;
+      --fs-carousel-item-margin-right: 0;
+      --fs-carousel-controls-bkg-color: #{$demo-dark};
+      --fs-carousel-controls-icon-color: #{$demo-gold};
+      --fs-carousel-controls-box-shadow: none;
+      --fs-carousel-bullet-bkg-color-selected: #{$demo-gold};
+      --fs-carousel-bullets-padding-top: var(--fs-spacing-2);
+    }
+
+    [data-fs-carousel-item] {
+      width: 100% !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: var(--fs-grid-max-width);
+  margin: 0 auto;
+}
+
+.slideLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.slide {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--fs-border-radius);
+  background-color: $demo-dark;
+
+  @include u.media("<notebook") {
+    border-radius: 0;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1260 / 360;
+
+  @include u.media("<notebook") {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.image {
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-spacing-2);
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 42%;
+  padding: var(--fs-spacing-6);
+  color: #ffffff;
+  background: linear-gradient(
+    90deg,
+    rgb(0 58 77 / 82%) 0%,
+    rgb(0 58 77 / 45%) 55%,
+    transparent 100%
+  );
+
+  @include u.media("<notebook") {
+    max-width: 100%;
+    padding: var(--fs-spacing-4);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(0 58 77 / 75%) 100%
+    );
+    justify-content: flex-end;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-text-size-6);
+  font-weight: var(--fs-text-weight-bold);
+  line-height: 1.15;
+
+  @include u.media(">=notebook") {
+    font-size: var(--fs-text-size-7);
+  }
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--fs-text-size-2);
+  line-height: 1.4;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--fs-spacing-1);
+  padding: var(--fs-spacing-2) var(--fs-spacing-4);
+  font-size: var(--fs-text-size-1);
+  font-weight: var(--fs-text-weight-bold);
+  color: $demo-dark;
+  background-color: $demo-gold;
+  border-radius: var(--fs-border-radius);
+}

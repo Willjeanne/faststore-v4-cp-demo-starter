@@ -1,0 +1,77 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "CategoryTiles",
+  "$componentTitle": "Category Tiles",
+  "title": "Category Tiles (use 3, 6 or 9 tiles)",
+  "description": "Editorial tile grid — 3 tiles per row. ⚠️ Always add 3, 6 or 9 tiles for clean rows. Each tile: image + tag + title, fully clickable.",
+  "type": "object",
+  "properties": {
+    "sectionTitle": {
+      "title": "Section title (optional)",
+      "type": "string",
+      "default": ""
+    },
+    "tiles": {
+      "title": "Tiles (add 3, 6 or 9)",
+      "description": "⚠️ Always add a multiple of 3 (3, 6 or 9) — the grid displays 3 tiles per row.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "description": "Pick from media library or paste an external URL",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": ["png","jpg","jpeg","gif","svg","webp"]
+              }
+            }
+          },
+          "imageUrl": {
+            "title": "Or external image URL",
+            "description": "Alternative — paste a full https:// URL if you do not want to use the media library",
+            "type": "string",
+            "default": ""
+          },
+          "imageAlt": {
+            "title": "Image alt text",
+            "type": "string",
+            "default": ""
+          },
+          "tag": {
+            "title": "Tag (small red label, optional)",
+            "description": "Short uppercase label shown above the title (e.g. MEMBERSHIP, FANS)",
+            "type": "string",
+            "default": ""
+          },
+          "title": {
+            "title": "Title",
+            "type": "string",
+            "default": ""
+          },
+          "titleColor": {
+            "title": "Title color",
+            "description": "navy / white / red / gold / black",
+            "type": "string",
+            "default": "navy"
+          },
+          "textAlign": {
+            "title": "Text alignment",
+            "description": "left / center / right — where the tag and title are positioned inside the tile",
+            "type": "string",
+            "default": "left"
+          },
+          "url": {
+            "title": "Link URL",
+            "description": "Internal path (e.g. /club) or external URL (https://...)",
+            "type": "string",
+            "default": ""
+          }
+        }
+      }
+    }
+  }
+}

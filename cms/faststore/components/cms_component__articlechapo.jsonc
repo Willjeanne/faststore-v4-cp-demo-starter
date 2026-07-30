@@ -1,0 +1,40 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "ArticleChapo",
+  "$componentTitle": "Article Chapô",
+  "title": "Article Chapô",
+  "description": "Centered article intro — eyebrow, title, lead paragraph, author and date",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "eyebrow": {
+      "title": "Eyebrow label (e.g. Player Story, Interview)",
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "title": "Article title (optional — if omitted uses HeroBanner title)",
+      "type": "string",
+      "default": ""
+    },
+    "lead": {
+      "title": "Lead paragraph (italic intro)",
+      "type": "string"
+    },
+    "author": {
+      "title": "Author name (optional)",
+      "type": "string",
+      "default": ""
+    },
+    "date": {
+      "title": "Publication date (optional, e.g. June 4, 2026)",
+      "type": "string",
+      "default": ""
+    },
+    "readingTime": {
+      "title": "Reading time (optional, e.g. 5 min read)",
+      "type": "string",
+      "default": ""
+    }
+  }
+}

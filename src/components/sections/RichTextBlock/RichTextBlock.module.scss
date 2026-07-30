@@ -1,0 +1,96 @@
+.container {
+  width: 100%;
+  padding: var(--fs-spacing-7) var(--fs-spacing-5);
+}
+
+// ── Layouts ──────────────────────────────────────────────────────────────────
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-spacing-6);
+
+  [data-layout='centered'] & {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  [data-layout='left'] & {
+    max-width: 780px;
+    margin: 0;
+  }
+
+  [data-layout='two-columns'] & {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (min-width: 900px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--fs-spacing-8);
+      align-items: start;
+    }
+  }
+}
+
+// ── Section (subtitle + body pair) ──────────────────────────────────────────
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-spacing-3);
+}
+
+.subtitle {
+  font-family: var(--fs-text-face-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--fs-color-accent-0);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  padding-bottom: var(--fs-spacing-2);
+  border-bottom: 2px solid var(--fs-color-accent-0);
+  display: inline-block;
+}
+
+// ── Body typography ──────────────────────────────────────────────────────────
+
+.body {
+  font-family: var(--fs-text-face-body);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.75;
+  color: var(--fs-color-main-4);
+
+  // Inline HTML elements
+  strong { font-weight: 700; }
+  em     { font-style: italic; }
+  u      { text-decoration: underline; text-underline-offset: 3px; }
+
+  a {
+    color: var(--fs-color-accent-0);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--fs-color-accent-0);
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.75; }
+  }
+
+  br { display: block; content: ''; margin-bottom: 0.75em; }
+}
+
+// ── Drop cap (first letter of first paragraph) ───────────────────────────────
+
+.dropCap {
+  &::first-letter {
+    float: left;
+    font-family: var(--fs-text-face-display);
+    font-size: 4.5em;
+    font-weight: 900;
+    line-height: 0.8;
+    color: var(--fs-color-accent-0);
+    margin-right: 0.1em;
+    margin-top: 0.05em;
+  }
+}

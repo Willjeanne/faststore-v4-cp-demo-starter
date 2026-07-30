@@ -1,0 +1,94 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "MegaMenu",
+  "$componentTitle": "Mega Menu",
+  "title": "Mega Menu",
+  "description": "Category mega menu fed by catalog categories. Select which departments to show and optionally add custom links.",
+  "type": "object",
+  "properties": {
+    "viewAllLabel": {
+      "type": "string",
+      "title": "View all label",
+      "default": "View all"
+    },
+    "includeUnlistedDepartments": {
+      "type": "boolean",
+      "title": "Also show departments not listed below",
+      "default": false
+    },
+    "items": {
+      "title": "Menu items",
+      "description": "Leave empty to show all root categories from the catalog. Use categorySlug to pull a live category (and its subcategories). Use label + url for custom entries.",
+      "type": "array",
+      "items": {
+        "title": "Menu item",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Optional. For categories, defaults to the catalog name."
+          },
+          "categorySlug": {
+            "type": "string",
+            "title": "Category slug",
+            "description": "Catalog slug, e.g. office or office/paper. Pulls that category and its children."
+          },
+          "url": {
+            "type": "string",
+            "title": "Custom URL",
+            "description": "Used when this item is not a catalog category (or as fallback)."
+          },
+          "showSubcategories": {
+            "type": "boolean",
+            "title": "Show catalog subcategories",
+            "default": true
+          },
+          "extraLinks": {
+            "title": "Extra links in panel",
+            "type": "array",
+            "items": {
+              "title": "Link",
+              "type": "object",
+              "required": ["text", "url"],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "title": "Text"
+                },
+                "url": {
+                  "type": "string",
+                  "title": "URL"
+                }
+              }
+            }
+          },
+          "children": {
+            "title": "Custom children",
+            "description": "Additional manual child links (appended after catalog subcategories).",
+            "type": "array",
+            "items": {
+              "title": "Child link",
+              "type": "object",
+              "required": ["text", "url"],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "title": "Text"
+                },
+                "url": {
+                  "type": "string",
+                  "title": "URL"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

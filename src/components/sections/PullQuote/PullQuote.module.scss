@@ -1,0 +1,114 @@
+.container {
+  width: 100%;
+  padding: var(--fs-spacing-8) var(--fs-spacing-5);
+
+  &[data-bg='navy'] {
+    background-color: var(--fs-color-accent-2);
+    color: var(--fs-color-main-0);
+  }
+  &[data-bg='red'] {
+    background-color: var(--fs-color-accent-0);
+    color: var(--fs-color-main-0);
+  }
+  &[data-bg='white'] {
+    background-color: var(--fs-color-main-0);
+    color: var(--fs-color-accent-2);
+  }
+  &[data-bg='gold'] {
+    background-color: var(--fs-color-accent-3);
+    color: var(--fs-color-accent-2);
+  }
+}
+
+.inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fs-spacing-4);
+}
+
+// Decorative quotation marks
+.openingMark,
+.closingMark {
+  font-family: var(--fs-text-face-display);
+  font-size: 8rem;
+  line-height: 0;
+  font-weight: 900;
+  opacity: 0.15;
+  user-select: none;
+  display: block;
+
+  [data-bg='navy'] &,
+  [data-bg='red'] & { opacity: 0.2; }
+}
+
+.openingMark {
+  align-self: flex-start;
+  margin-bottom: -2rem;
+  color: currentColor;
+
+  [data-bg='white'] & { color: var(--fs-color-accent-0); opacity: 0.25; }
+}
+
+.closingMark {
+  align-self: flex-end;
+  margin-top: -2rem;
+  color: currentColor;
+
+  [data-bg='white'] & { color: var(--fs-color-accent-0); opacity: 0.25; }
+}
+
+// Quote text
+.quote {
+  margin: 0;
+
+  p {
+    font-family: var(--fs-text-face-display);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0;
+
+    [data-size='default'] & {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    [data-size='large'] & {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+    }
+  }
+}
+
+// Attribution
+.attribution {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-spacing-1);
+  align-items: center;
+  padding-top: var(--fs-spacing-3);
+  border-top: 2px solid currentColor;
+  opacity: 0.7;
+  width: 40%;
+  min-width: 200px;
+}
+
+.name {
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-small);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.role {
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-tiny);
+  font-style: italic;
+  opacity: 0.75;
+}

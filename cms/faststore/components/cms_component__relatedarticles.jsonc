@@ -1,0 +1,56 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "RelatedArticles",
+  "$componentTitle": "Related Articles",
+  "title": "Related Articles",
+  "description": "3 editorial article cards with image, tag, and title",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "sectionTitle": {
+      "title": "Section title",
+      "type": "string",
+      "default": "Related Articles"
+    },
+    "articles": {
+      "title": "Articles (max 3)",
+      "type": "array",
+      "items": {
+        "title": "Article",
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Cover image",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"]
+              }
+            }
+          },
+          "imageAlt": {
+            "title": "Image alt text",
+            "type": "string",
+            "default": ""
+          },
+          "tag": {
+            "title": "Tag (e.g. Interview, Match Report)",
+            "type": "string",
+            "default": ""
+          },
+          "title": {
+            "title": "Article title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Article URL",
+            "type": "string",
+            "default": "/"
+          }
+        }
+      }
+    }
+  }
+}

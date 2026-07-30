@@ -1,0 +1,71 @@
+{
+  "search": {
+    "$extends": ["#/components/base-page-template"],
+    "$singleton": true,
+    "type": "object",
+    "title": "Search Page",
+    "properties": {
+      "seo": {
+        "title": "SEO",
+        "description": "Search Engine Optimization options",
+        "type": "object",
+        "properties": {
+          "titleTemplate": {
+            "title": "Default page title template",
+            "description": "Template applied to the page title. Use %s to reference the page title.",
+            "type": "string",
+            "default": "%s | Search results"
+          }
+        },
+        "$componentTitle": "SEO"
+      },
+      "productGallery": {
+        "title": "Product Gallery",
+        "description": "ProductGallery options",
+        "type": "object",
+        "required": ["itemsPerPage", "sortBySelection"],
+        "properties": {
+          "itemsPerPage": {
+            "title": "Number of ProductCards per page",
+            "type": "integer",
+            "default": 12
+          },
+          "sortBySelection": {
+            "title": "Default sort by value",
+            "type": "string",
+            "default": "score_desc",
+            "enumNames": [
+              "Price, descending",
+              "Price, ascending",
+              "Top sales",
+              "Name, A-Z",
+              "Name, Z-A",
+              "Release date",
+              "Discount",
+              "Relevance"
+            ],
+            "enum": [
+              "price_desc",
+              "price_asc",
+              "orders_desc",
+              "name_asc",
+              "name_desc",
+              "release_desc",
+              "discount_desc",
+              "score_desc"
+            ]
+          }
+        },
+        "$componentTitle": "Product Gallery"
+      },
+      "sections": {
+        "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+      }
+    },
+    "readOnly": false,
+    "writeOnly": false,
+    "deprecated": false,
+    "$abstract": false,
+    "identifierKeys": []
+  }
+}

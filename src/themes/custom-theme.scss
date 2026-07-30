@@ -1,0 +1,463 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+// ----------------------------------------------------------
+// Demo Store-inspired theme (demo.ca)
+// ----------------------------------------------------------
+
+.theme {
+  // --------------------------------------------------------
+  // Colors — brand palette (#003a4d)
+  // --------------------------------------------------------
+  --fs-color-main-0                                     : #f5f5f5;
+  --fs-color-main-1                                     : #eeeeee;
+  --fs-color-main-2                                     : #003a4d;
+  --fs-color-main-3                                     : #002e3d;
+  --fs-color-main-4                                     : #00222e;
+
+  --fs-color-accent-0                                   : #e8f1f4;
+  --fs-color-accent-1                                   : #c5d9e0;
+  --fs-color-accent-2                                   : #ffcb05;
+  --fs-color-accent-3                                   : #298d8a;
+  --fs-color-accent-4                                   : #003a4d;
+
+  --fs-color-neutral-7                                  : #212529;
+  --fs-color-neutral-6                                  : #676767;
+  --fs-color-neutral-5                                  : #888888;
+  --fs-color-neutral-2                                  : #cccccc;
+  --fs-color-neutral-1                                  : #eeeeee;
+  --fs-color-neutral-bkg                                : #eeeeee;
+
+  --fs-color-success-bkg                                : #edf7ed;
+  --fs-color-success-2                                  : #007000;
+  --fs-color-warning-bkg                                : #fff8e1;
+  --fs-color-danger-bkg                                 : #fce4ec;
+
+  --fs-color-primary-bkg-light                          : var(--fs-color-neutral-0);
+  --fs-color-highlighted-bkg                            : #003a4d;
+  --fs-color-highlighted-text                           : var(--fs-color-neutral-0);
+
+  // --------------------------------------------------------
+  // Typography
+  // --------------------------------------------------------
+  --fs-text-weight-bold                                 : 600;
+  --fs-text-weight-black                                : 700;
+  --fs-text-face-body                                   : "Lexend Deca", "Roboto", -apple-system, system-ui, sans-serif;
+
+  // --------------------------------------------------------
+  // Grid & Layout
+  // --------------------------------------------------------
+  --fs-grid-max-width                                   : 1260px;
+
+  @include u.media(">=notebook") {
+    --fs-grid-padding                                   : var(--fs-spacing-5);
+  }
+
+  // --------------------------------------------------------
+  // Refinements
+  // --------------------------------------------------------
+  --fs-border-color                                     : var(--fs-color-neutral-2);
+  --fs-border-radius                                    : 4px;
+  --fs-border-radius-pill                               : 4px;
+  --fs-input-height                                     : 48px;
+
+  .section {
+    ////////////////////
+    // Global
+    ////////////////////
+
+    [data-fs-button] {
+      --fs-button-padding                               : calc(var(--fs-spacing-1) - (var(--fs-button-border-width) * 2)) var(--fs-spacing-4);
+      --fs-button-border-radius                         : var(--fs-border-radius);
+      --fs-button-border-width                          : var(--fs-border-width-thick);
+      --fs-button-text-weight                           : 500;
+
+      --fs-buy-button-bkg-color                         : var(--fs-color-main-2);
+      --fs-buy-button-bkg-color-hover                   : var(--fs-color-main-3);
+      --fs-buy-button-bkg-color-active                  : var(--fs-color-main-4);
+
+      --fs-button-secondary-text-color                  : var(--fs-color-main-2);
+      --fs-button-secondary-text-color-hover            : var(--fs-color-text-inverse);
+      --fs-button-secondary-bkg-color-hover             : var(--fs-color-main-2);
+      --fs-button-secondary-bkg-color-active            : var(--fs-color-main-3);
+      --fs-button-secondary-border-color                : var(--fs-color-main-2);
+
+      --fs-button-secondary-inverse-text-color          : var(--fs-color-text-inverse);
+      --fs-button-secondary-inverse-text-color-hover    : var(--fs-button-secondary-inverse-text-color);
+      --fs-button-secondary-inverse-bkg-color-hover     : #ffffff50;
+      --fs-button-secondary-inverse-bkg-color-active    : #ffffff60;
+      --fs-button-secondary-inverse-border-color        : var(--fs-button-secondary-inverse-bkg-color-hover);
+      --fs-button-secondary-inverse-border-color-hover  : transparent;
+      --fs-button-secondary-inverse-border-color-active : transparent;
+    }
+
+    [data-fs-input] {
+      --fs-input-border-radius                          : var(--fs-border-radius);
+    }
+
+    [data-fs-input-field] {
+      --fs-input-field-padding                          : var(--fs-spacing-2) var(--fs-spacing-2) 0;
+      --fs-input-field-label-padding                    : 0 var(--fs-spacing-2);
+      --fs-input-field-button-height                    : 48px;
+
+      [data-fs-button] { min-width: var(--fs-input-field-button-height); }
+      input:not(:placeholder-shown) + label, &:focus + label { top: u.rem(9px); }
+    }
+
+    [data-fs-quantity-selector] {
+      --fs-qty-selector-border-radius                   : var(--fs-border-radius);
+    }
+
+    // Navbar — ensure logo row uses brand color
+    .section-navbar,
+    .section-navbar [data-fs-navbar],
+    .section-navbar [data-fs-navbar-header],
+    .section-navbar [data-fs-navbar-links] {
+      --fs-navbar-bkg-color: #003a4d;
+      background-color: #003a4d;
+    }
+
+    .section-navbar [data-fs-navbar-header] {
+      height: auto;
+      backdrop-filter: none;
+    }
+
+    // Promo alert bar — white background like Demo Store
+    [data-fs-alert] {
+      --fs-alert-bkg-color                              : #ffffff;
+      --fs-alert-text-color                             : #212529;
+      --fs-alert-text-size                              : var(--fs-text-size-1);
+      --fs-alert-icon-color                             : #212529;
+      --fs-alert-link-color                             : #212529;
+      --fs-alert-link-color-visited                     : #212529;
+      --fs-alert-button-text-color                      : #212529;
+      justify-content: center;
+      font-weight: var(--fs-text-weight-bold);
+      border-bottom: 1px solid var(--fs-color-neutral-2);
+    }
+
+    [data-fs-carousel] {
+      --fs-carousel-controls-box-shadow                 : none;
+      --fs-carousel-controls-bkg-color                  : var(--fs-color-main-2);
+      --fs-carousel-controls-icon-color                 : var(--fs-color-text-inverse);
+      --fs-carousel-bullet-bkg-color-selected           : var(--fs-color-main-2);
+      --fs-carousel-item-margin-right                   : var(--fs-spacing-4);
+
+      [data-fs-button]:disabled [data-fs-button-wrapper] { background-color: var(--fs-color-neutral-1); }
+    }
+
+    [data-fs-incentives] {
+      --fs-incentives-bkg-color                         : var(--fs-color-main-0);
+
+      [data-fs-list] {
+        padding: 0 var(--fs-grid-padding);
+      }
+
+      @include u.media(">=notebook") {
+        --fs-incentives-gap                               : var(--fs-spacing-6);
+      }
+    }
+
+    // Product cards — B2B catalog style
+    [data-fs-product-card] {
+      --fs-product-card-wide-content-padding            : var(--fs-spacing-3);
+      --fs-product-card-border-width                    : var(--fs-border-width);
+      --fs-product-card-border-color                    : var(--fs-border-color);
+      --fs-product-card-border-radius                   : var(--fs-border-radius);
+      --fs-product-card-title-weight                    : var(--fs-text-weight-medium);
+      --fs-product-card-wide-bkg-color                  : var(--fs-color-neutral-0);
+      --fs-product-card-padding                         : var(--fs-spacing-3);
+      --fs-product-card-shadow-hover                    : 0 2px 8px rgb(0 0 0 / 8%);
+
+      [data-fs-product-card-prices] {
+        column-gap: var(--fs-grid-gap-0);
+      }
+
+      [data-fs-product-card-title] {
+        color: var(--fs-color-neutral-7);
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          border-color: var(--fs-color-main-2);
+
+          [data-fs-product-card-image] img { opacity: 1; }
+        }
+      }
+    }
+
+    [data-fs-product-card-variant="wide"] {
+      --fs-product-card-title-size                      : var(--fs-text-size-title-product);
+
+      [data-fs-image] { border-radius: var(--fs-border-radius); }
+      [data-fs-product-card-title] { letter-spacing: normal; }
+    }
+
+    [data-fs-discount-badge] {
+      --fs-discount-badge-bkg-color                     : var(--fs-color-main-2);
+      --fs-discount-badge-text-color                    : var(--fs-color-text-inverse);
+    }
+
+    ////////////////////
+    // Footer — light gray like Demo Store
+    ////////////////////
+
+    [data-fs-footer] {
+      --fs-footer-bkg-color                             : var(--fs-color-neutral-1);
+      --fs-footer-divisor-border-color                  : var(--fs-color-neutral-2);
+
+      [data-fs-link] {
+        color: var(--fs-color-neutral-7);
+
+        &:hover {
+          color: var(--fs-color-main-2);
+        }
+      }
+    }
+
+    ////////////////////
+    // HOMEPAGE
+    ////////////////////
+
+    [data-fs-hero] {
+      @include u.layout-content;
+
+      &[data-fs-hero-variant="primary"] {
+        --fs-hero-main-bkg-color                        : var(--fs-color-main-4);
+        --fs-hero-main-title-color                      : var(--fs-color-text-inverse);
+        --fs-hero-main-subtitle-color                   : var(--fs-color-neutral-0);
+
+        [data-fs-hero-heading] {
+          @include u.media(">=notebook") {
+            padding: var(--fs-spacing-10) var(--fs-spacing-5);
+          }
+        }
+      }
+
+      &[data-fs-hero-variant="secondary"] {
+        --fs-hero-light-bkg-color                       : var(--fs-color-main-0);
+      }
+    }
+
+    [data-fs-tiles] {
+      --fs-tiles-gap-notebook                          : var(--fs-grid-gap-3);
+      --fs-tiles-gap-mobile                            : var(--fs-grid-gap-3);
+
+      [data-fs-product-card-image] {
+        aspect-ratio: 1;
+      }
+
+      [data-fs-tile] {
+        border: var(--fs-border-width) solid var(--fs-border-color);
+        border-radius: var(--fs-border-radius);
+        overflow: hidden;
+
+        > * {
+          @include u.media(">=notebook") {
+            grid-auto-rows: 280px auto;
+          }
+        }
+      }
+    }
+
+    [data-fs-newsletter-color-variant="light"] {
+      --fs-newsletter-light-bkg-color                      : var(--fs-color-main-0);
+      max-width: 670px;
+
+      [data-fs-newsletter-addendum] {
+        [data-fs-link] { color: var(--fs-color-main-2); }
+      }
+
+      [data-fs-button-inverse="true"] [data-fs-button-wrapper] {
+        color: var(--fs-color-main-2);
+        border-color: var(--fs-border-color);
+      }
+    }
+
+    ////////////////////
+    // PDP
+    ////////////////////
+
+    [data-fs-product-title] {
+      --fs-product-title-text-size                      : var(--fs-text-size-5);
+      --fs-product-title-text-weight                    : var(--fs-text-weight-bold);
+      color: var(--fs-color-accent-4);
+    }
+
+    [data-fs-product-details-title] {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    [data-fs-product-details] {
+      --fs-product-details-vertical-spacing              : var(--fs-spacing-5);
+      --fs-product-details-horizontal-spacing            : var(--fs-spacing-6);
+
+      [data-fs-product-details-section] {
+        padding-right: 0;
+        padding-left: 0;
+        border-right: none;
+        border-left: none;
+      }
+    }
+
+    [data-fs-sku-selector] {
+      --fs-sku-selector-image-border-radius                : var(--fs-border-radius);
+      --fs-sku-selector-option-border-radius               : var(--fs-border-radius);
+      --fs-sku-selector-option-border-color                : var(--fs-border-color);
+    }
+
+    [data-fs-image-gallery] > [data-fs-image] {
+      object-fit: contain;
+      background-color: var(--fs-color-neutral-0);
+
+      @include u.media("<notebook") {
+        height: 280px;
+      }
+    }
+
+    [data-fs-image-gallery-selector-control-button] {
+      --fs-image-gallery-selector-control-bkg-color        : var(--fs-color-main-2);
+      --fs-image-gallery-selector-control-shadow           : none;
+
+      [data-fs-button-wrapper] {
+        color: var(--fs-color-text-inverse);
+      }
+
+      &:hover [data-fs-button-wrapper] {
+        background-color: var(--fs-color-main-3);
+      }
+    }
+
+    ////////////////////
+    // PLP
+    ////////////////////
+
+    [data-fs-hero-variant="secondary"] {
+      --fs-hero-light-bkg-color                            : var(--fs-color-main-0);
+      --fs-hero-secondary-title-size                       : var(--fs-text-size-7);
+      --fs-hero-secondary-title-color                      : var(--fs-color-accent-4);
+      --fs-hero-secondary-image-height-mobile              : unset;
+      --fs-hero-secondary-image-height-desktop             : unset;
+
+      [data-fs-hero-image] { display: none; }
+      [data-fs-hero-wrapper] { margin: 0; }
+      [data-fs-hero-subtitle] { color: var(--fs-color-text-light); }
+      [data-fs-hero-title] { letter-spacing: normal; }
+    }
+
+    [data-fs-product-grid] {
+      --fs-product-grid-gap-mobile                         : var(--fs-grid-gap-2);
+      --fs-product-grid-gap-desktop                        : var(--fs-spacing-4);
+    }
+
+    [data-fs-product-listing] {
+      [data-fs-product-listing-results],
+      [data-fs-product-listing-results-count] { background-color: transparent; }
+
+      [data-fs-product-listing-results] {
+        --padding: var(--fs-grid-gap-2);
+      }
+
+      [data-fs-product-listing-results-count] {
+        color: var(--fs-color-text-light);
+      }
+    }
+
+    [data-fs-product-listing-content-grid] {
+      column-gap: var(--fs-spacing-4);
+
+      @include u.media(">=notebook") { row-gap: var(--fs-spacing-4); }
+    }
+
+    [data-fs-filter] {
+      --fs-filter-accordion-button-padding-right-notebook     : 0;
+      --fs-filter-accordion-item-panel-padding-right-notebook : 0;
+      --fs-filter-accordion-border-radius-notebook            : 0;
+      --fs-filter-title-margin-bottom                         : var(--fs-spacing-3);
+
+      [data-fs-filter-title] {
+        font-weight: var(--fs-text-weight-semibold);
+        color: var(--fs-color-accent-4);
+      }
+
+      [data-fs-filter-accordion] {
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+      }
+    }
+
+    [data-fs-slider] {
+      --fs-slider-thumb-bkg-color                          : var(--fs-color-main-2);
+    }
+
+    ////////////////////
+    // Cart Sidebar
+    ////////////////////
+
+    [data-fs-cart-sidebar] {
+      --fs-cart-sidebar-bkg-color                          : var(--fs-color-neutral-0);
+      --fs-cart-sidebar-footer-box-shadow                  : none;
+      --fs-slide-over-partial-max-width-notebook           : 480px;
+
+      @include u.media(">=notebook") {
+        --fs-cart-sidebar-list-padding                       : var(--fs-spacing-3) var(--fs-spacing-7);
+        --fs-slide-over-header-padding                       : var(--fs-spacing-2) var(--fs-spacing-7);
+      }
+
+      [data-fs-empty-state] {
+        --fs-empty-state-bkg-color-default                   : var(--fs-color-neutral-0);
+      }
+
+      [data-fs-slide-over-header] [data-fs-button-wrapper] {
+        color: var(--fs-color-text);
+      }
+    }
+
+    [data-fs-cart-sidebar-footer] {
+      @include u.media(">=notebook") {
+        padding: 0 var(--fs-spacing-7) var(--fs-spacing-4);
+      }
+
+      [data-fs-order-summary] {
+        --fs-order-summary-row-gap                           : var(--fs-grid-gap-0);
+
+        padding-top: var(--fs-spacing-4);
+        margin-bottom: var(--fs-spacing-3);
+        border-top: var(--fs-border-width) solid var(--fs-border-color);
+      }
+    }
+
+    [data-fs-cart-item] {
+      --fs-cart-item-border-width : 0;
+
+      [data-fs-cart-item-content] {
+        padding-bottom: var(--fs-spacing-4);
+        padding-left: 0;
+      }
+
+      [data-quantity-selector-input] {
+        border-color: var(--fs-border-color);
+        border-radius: var(--fs-border-radius);
+      }
+    }
+
+    [data-fs-cart-sidebar-list] li {
+      padding-bottom: var(--fs-spacing-4);
+      &:not(:only-child) { border-bottom: var(--fs-border-width) solid var(--fs-border-color); }
+    }
+
+    ///////////////////
+    // Section titles
+    ///////////////////
+
+    .text__title-section {
+      font-size: var(--fs-text-size-5);
+      font-weight: var(--fs-text-weight-bold);
+      letter-spacing: normal;
+      color: var(--fs-color-accent-4);
+    }
+  }
+
+  .section-banner + .section-newsletter { background-color: var(--fs-color-neutral-bkg); }
+}

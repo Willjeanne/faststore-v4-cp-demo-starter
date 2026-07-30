@@ -1,0 +1,206 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+$demo-dark: #003a4d;
+$demo-gold: #ffcb05;
+$demo-gold-hover: #ffc600;
+
+.inkAndTonerFinder {
+  padding: var(--fs-spacing-6) 0;
+  background-color: var(--fs-color-neutral-0);
+}
+
+.container {
+  width: 100%;
+}
+
+.card {
+  padding: var(--fs-spacing-5);
+  background: #ffffff;
+  border: 1px solid var(--fs-color-neutral-2);
+  border-radius: var(--fs-border-radius);
+  box-shadow: 0 0.75rem 2rem rgb(0 58 77 / 8%);
+}
+
+.header {
+  display: flex;
+  gap: var(--fs-spacing-3);
+  align-items: center;
+  margin-bottom: var(--fs-spacing-5);
+}
+
+.headerIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: $demo-dark;
+  background: rgb(255 203 5 / 18%);
+  border-radius: var(--fs-border-radius);
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentcolor;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-text-size-4);
+  font-weight: var(--fs-text-weight-bold);
+  line-height: 1.2;
+  color: $demo-dark;
+}
+
+.section + .section {
+  margin-top: var(--fs-spacing-4);
+}
+
+.sectionTitle {
+  margin: 0 0 var(--fs-spacing-3);
+  font-size: var(--fs-text-size-2);
+  font-weight: var(--fs-text-weight-bold);
+  color: var(--fs-color-neutral-7);
+}
+
+.selectGrid {
+  display: grid;
+  gap: var(--fs-spacing-3);
+
+  @include u.media(">=tablet") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.field,
+.searchField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-spacing-1);
+}
+
+.fieldLabel {
+  font-size: var(--fs-text-size-1);
+  font-weight: 500;
+  color: var(--fs-color-neutral-6);
+}
+
+.select,
+.input {
+  width: 100%;
+  height: var(--fs-input-height, 48px);
+  padding: 0 var(--fs-spacing-3);
+  font-size: var(--fs-text-size-1);
+  color: var(--fs-color-neutral-7);
+  background-color: #ffffff;
+  border: 1px solid var(--fs-color-neutral-2);
+  border-radius: var(--fs-border-radius);
+  transition:
+    border-color var(--fs-transition-timing) ease,
+    box-shadow var(--fs-transition-timing) ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--fs-color-neutral-5);
+  }
+
+  &:focus-visible {
+    border-color: $demo-dark;
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(0 58 77 / 12%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--fs-color-neutral-1);
+    opacity: 0.75;
+  }
+}
+
+.select {
+  appearance: none;
+  padding-right: calc(var(--fs-spacing-3) + 1.25rem);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23676767' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--fs-spacing-2) center;
+}
+
+.divider {
+  position: relative;
+  margin: var(--fs-spacing-5) 0;
+  text-align: center;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: "";
+    background-color: var(--fs-color-neutral-2);
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0 var(--fs-spacing-3);
+    font-size: var(--fs-text-size-0);
+    font-weight: 500;
+    color: var(--fs-color-neutral-6);
+    text-transform: lowercase;
+    background-color: #ffffff;
+    border: 1px solid var(--fs-color-neutral-2);
+    border-radius: var(--fs-border-radius-pill);
+  }
+}
+
+.searchForm {
+  display: grid;
+  gap: var(--fs-spacing-3);
+
+  @include u.media(">=tablet") {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+
+.searchButton {
+  min-width: 8.5rem;
+  height: var(--fs-input-height, 48px);
+  padding: 0 var(--fs-spacing-5);
+  font-size: var(--fs-text-size-1);
+  font-weight: var(--fs-text-weight-bold);
+  color: $demo-dark;
+  cursor: pointer;
+  background-color: $demo-gold;
+  border: 0;
+  border-radius: var(--fs-border-radius);
+  transition: background-color var(--fs-transition-timing) ease;
+
+  &:hover {
+    background-color: $demo-gold-hover;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(0 58 77 / 18%);
+  }
+}
+
+.footer {
+  margin: var(--fs-spacing-4) 0 0;
+  font-size: var(--fs-text-size-0);
+  color: var(--fs-color-neutral-6);
+
+  a {
+    font-weight: 600;
+    color: $demo-dark;
+    text-decoration: underline;
+
+    &:hover {
+      color: $demo-gold-hover;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.spacer {
+  width: 100%;
+  display: block;
+
+  &[data-bg='white']       { background-color: var(--fs-color-main-0); }
+  &[data-bg='navy']        { background-color: var(--fs-color-accent-2); }
+  &[data-bg='red']         { background-color: var(--fs-color-accent-0); }
+  &[data-bg='gold']        { background-color: var(--fs-color-accent-3); }
+  &[data-bg='light-grey']  { background-color: var(--fs-color-main-1); }
+}

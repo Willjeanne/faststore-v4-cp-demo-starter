@@ -1,0 +1,21 @@
+// Copy selected values into src/themes/custom-theme.scss after reviewing screenshots.
+
+.theme {
+  --fs-color-main-0: #f7f7f7;
+  --fs-color-main-1: #ececec;
+  --fs-color-main-2: #003a4d;
+  --fs-color-main-3: #002e3d;
+  --fs-color-main-4: #001f29;
+
+  --fs-color-accent-0: #fff7d6;
+  --fs-color-accent-1: #ffe77a;
+  --fs-color-accent-2: #ffcb05;
+  --fs-color-accent-3: #1b8a89;
+  --fs-color-accent-4: #003a4d;
+
+  --fs-text-face-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --fs-text-weight-bold: 650;
+  --fs-grid-max-width: 1260px;
+  --fs-border-radius: 4px;
+  --fs-border-radius-pill: 4px;
+}

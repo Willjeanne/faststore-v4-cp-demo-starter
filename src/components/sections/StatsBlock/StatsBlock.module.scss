@@ -1,0 +1,101 @@
+.container {
+  width: 100%;
+  padding: var(--fs-spacing-7) var(--fs-spacing-5);
+  text-align: center;
+
+  &[data-bg='navy'] {
+    background-color: var(--fs-color-accent-2);
+    color: var(--fs-color-main-0);
+  }
+  &[data-bg='red'] {
+    background-color: var(--fs-color-accent-0);
+    color: var(--fs-color-main-0);
+  }
+  &[data-bg='white'] {
+    background-color: var(--fs-color-main-0);
+    color: var(--fs-color-accent-2);
+  }
+}
+
+.title {
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-tiny);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin: 0 0 var(--fs-spacing-5) 0;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fs-spacing-1);
+  padding: var(--fs-spacing-4) var(--fs-spacing-7);
+
+  // Vertical divider between stats
+  & + & {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  [data-bg='white'] & + & {
+    border-left-color: var(--fs-color-main-2);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--fs-spacing-4) var(--fs-spacing-5);
+
+    & + & {
+      border-left: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.value {
+  font-family: var(--fs-text-face-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  // Color by background
+  [data-bg='navy'] & { color: var(--fs-color-accent-3); }
+  [data-bg='red'] &  { color: var(--fs-color-main-0); }
+  [data-bg='white'] &{ color: var(--fs-color-accent-0); }
+
+  &[data-style='bold']   { font-weight: 900; font-style: normal; }
+  &[data-style='italic'] { font-weight: 700; font-style: italic; }
+  &[data-style='normal'] { font-weight: 700; font-style: normal; }
+}
+
+.suffix {
+  font-size: 0.6em;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.label {
+  font-family: var(--fs-text-face-body);
+  font-size: var(--fs-text-size-small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+
+  &[data-style='bold']   { font-weight: 700; font-style: normal; }
+  &[data-style='italic'] { font-weight: 400; font-style: italic; }
+  &[data-style='normal'] { font-weight: 400; font-style: normal; }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    flex-direction: column;
+  }
+}

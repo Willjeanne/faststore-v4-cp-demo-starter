@@ -1,0 +1,35 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "PullQuote",
+  "$componentTitle": "Pull Quote",
+  "title": "Pull Quote",
+  "description": "Large editorial pull quote with optional attribution. Backgrounds: white, navy, red, gold",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "quote": {
+      "title": "Quote text",
+      "type": "string"
+    },
+    "attribution": {
+      "title": "Attribution name (optional, e.g. Thomas Müller)",
+      "type": "string",
+      "default": ""
+    },
+    "role": {
+      "title": "Role (optional, e.g. FC Bayern Midfielder)",
+      "type": "string",
+      "default": ""
+    },
+    "backgroundColor": {
+      "title": "Background color (white / navy / red / gold)",
+      "type": "string",
+      "default": "white"
+    },
+    "size": {
+      "title": "Quote size (default / large)",
+      "type": "string",
+      "default": "default"
+    }
+  }
+}

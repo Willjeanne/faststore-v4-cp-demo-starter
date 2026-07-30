@@ -1,0 +1,2452 @@
+{
+  "$base": "vtex.faststore@4",
+  "components": {
+    "ArticleChapo": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ArticleChapo",
+      "$componentTitle": "Article Chapô",
+      "title": "Article Chapô",
+      "description": "Centered article intro — eyebrow, title, lead paragraph, author and date",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "eyebrow": {
+          "title": "Eyebrow label (e.g. Player Story, Interview)",
+          "type": "string",
+          "default": ""
+        },
+        "title": {
+          "title": "Article title (optional — if omitted uses HeroBanner title)",
+          "type": "string",
+          "default": ""
+        },
+        "lead": {
+          "title": "Lead paragraph (italic intro)",
+          "type": "string"
+        },
+        "author": {
+          "title": "Author name (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "date": {
+          "title": "Publication date (optional, e.g. June 4, 2026)",
+          "type": "string",
+          "default": ""
+        },
+        "readingTime": {
+          "title": "Reading time (optional, e.g. 5 min read)",
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "BannerCarousel": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "BannerCarousel",
+      "$componentTitle": "Banner Carousel",
+      "title": "Banner Carousel",
+      "description": "Rotating promotional banners for the homepage",
+      "type": "object",
+      "required": [
+        "banners"
+      ],
+      "properties": {
+        "infiniteMode": {
+          "title": "Infinite loop",
+          "type": "boolean",
+          "default": true
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "type": "boolean",
+          "default": true
+        },
+        "autoplayInterval": {
+          "title": "Autoplay interval (ms)",
+          "type": "integer",
+          "default": 6000,
+          "minimum": 3000
+        },
+        "banners": {
+          "title": "Banners",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Banner",
+            "type": "object",
+            "required": [
+              "image"
+            ],
+            "properties": {
+              "image": {
+                "type": "object",
+                "title": "Image",
+                "required": [
+                  "src",
+                  "alt"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "title": "Image",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "alt": {
+                    "type": "string",
+                    "title": "Alternative label"
+                  }
+                }
+              },
+              "title": {
+                "type": "string",
+                "title": "Title"
+              },
+              "subtitle": {
+                "type": "string",
+                "title": "Subtitle"
+              },
+              "ctaText": {
+                "type": "string",
+                "title": "Button text"
+              },
+              "link": {
+                "title": "Link",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "title": "URL"
+                  },
+                  "linkTargetBlank": {
+                    "type": "boolean",
+                    "title": "Open link in new window?",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CategoryTiles": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CategoryTiles",
+      "$componentTitle": "Category Tiles",
+      "title": "Category Tiles (use 3, 6 or 9 tiles)",
+      "description": "Editorial tile grid — 3 tiles per row. ⚠️ Always add 3, 6 or 9 tiles for clean rows. Each tile: image + tag + title, fully clickable.",
+      "type": "object",
+      "properties": {
+        "sectionTitle": {
+          "title": "Section title (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "tiles": {
+          "title": "Tiles (add 3, 6 or 9)",
+          "description": "⚠️ Always add a multiple of 3 (3, 6 or 9) — the grid displays 3 tiles per row.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "image": {
+                "title": "Image",
+                "description": "Pick from media library or paste an external URL",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageUrl": {
+                "title": "Or external image URL",
+                "description": "Alternative — paste a full https:// URL if you do not want to use the media library",
+                "type": "string",
+                "default": ""
+              },
+              "imageAlt": {
+                "title": "Image alt text",
+                "type": "string",
+                "default": ""
+              },
+              "tag": {
+                "title": "Tag (small red label, optional)",
+                "description": "Short uppercase label shown above the title (e.g. MEMBERSHIP, FANS)",
+                "type": "string",
+                "default": ""
+              },
+              "title": {
+                "title": "Title",
+                "type": "string",
+                "default": ""
+              },
+              "titleColor": {
+                "title": "Title color",
+                "description": "navy / white / red / gold / black",
+                "type": "string",
+                "default": "navy"
+              },
+              "textAlign": {
+                "title": "Text alignment",
+                "description": "left / center / right — where the tag and title are positioned inside the tile",
+                "type": "string",
+                "default": "left"
+              },
+              "url": {
+                "title": "Link URL",
+                "description": "Internal path (e.g. /club) or external URL (https://...)",
+                "type": "string",
+                "default": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "CountdownBanner": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CountdownBanner",
+      "$componentTitle": "Countdown Banner",
+      "title": "Countdown Banner",
+      "description": "Full-width promotional bar with live countdown timer — disappears when expired",
+      "type": "object",
+      "required": [
+        "message",
+        "endDate"
+      ],
+      "properties": {
+        "message": {
+          "title": "Promotional message",
+          "type": "string",
+          "default": "Limited offer"
+        },
+        "endDate": {
+          "title": "End date (ISO format: YYYY-MM-DDTHH:MM:SS)",
+          "description": "Example: 2026-12-31T23:59:59",
+          "type": "string",
+          "default": "2026-12-31T23:59:59"
+        },
+        "ctaLabel": {
+          "title": "CTA button text (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "ctaUrl": {
+          "title": "CTA button URL (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "backgroundColor": {
+          "title": "Background color",
+          "type": "string",
+          "default": "#DC052D"
+        },
+        "textColor": {
+          "title": "Text color",
+          "type": "string",
+          "default": "#FFFFFF"
+        }
+      }
+    },
+    "FullWidthShelf": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "FullWidthShelf",
+      "$componentTitle": "Full Width Shelf",
+      "title": "Full Width Shelf",
+      "description": "Full-width product carousel fetched from VTEX catalog by category ID",
+      "type": "object",
+      "required": [
+        "categorySlug"
+      ],
+      "properties": {
+        "title": {
+          "title": "Section title (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "categorySlug": {
+          "title": "Category Name",
+          "description": "Exact category name from VTEX Admin (e.g. Soccer, Basketball, Training) — case-insensitive",
+          "type": "string",
+          "default": ""
+        },
+        "count": {
+          "title": "Number of products to display",
+          "type": "integer",
+          "enumNames": [
+            "4 products",
+            "8 products",
+            "12 products"
+          ],
+          "enum": [
+            4,
+            8,
+            12
+          ],
+          "default": 8
+        }
+      }
+    },
+    "HeroBanner": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "HeroBanner",
+      "$componentTitle": "Hero Banner",
+      "title": "Hero Banner",
+      "description": "Full-width hero with image, title, subtitle and CTA",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "default": "FC Bayern München"
+        },
+        "subtitle": {
+          "title": "Subtitle",
+          "type": "string",
+          "default": ""
+        },
+        "ctaLabel": {
+          "title": "CTA button text",
+          "type": "string",
+          "default": "Shop Now"
+        },
+        "ctaUrl": {
+          "title": "CTA URL",
+          "type": "string",
+          "default": "/"
+        },
+        "imageDesktop": {
+          "title": "Image (desktop)",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "imageMobile": {
+          "title": "Image (mobile, optional)",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "imageAlt": {
+          "title": "Image alt text",
+          "type": "string",
+          "default": ""
+        },
+        "textPosition": {
+          "title": "Text position",
+          "type": "string",
+          "enumNames": [
+            "Top left",
+            "Top center",
+            "Top right",
+            "Middle left",
+            "Middle center",
+            "Middle right",
+            "Bottom left",
+            "Bottom center",
+            "Bottom right"
+          ],
+          "enum": [
+            "top-left",
+            "top-center",
+            "top-right",
+            "middle-left",
+            "middle-center",
+            "middle-right",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ],
+          "default": "middle-left"
+        },
+        "textColor": {
+          "title": "Text color",
+          "type": "string",
+          "enumNames": [
+            "White",
+            "Black"
+          ],
+          "enum": [
+            "white",
+            "black"
+          ],
+          "default": "white"
+        },
+        "overlayOpacity": {
+          "title": "Overlay opacity (0–80)",
+          "type": "integer",
+          "default": 30
+        }
+      }
+    },
+    "InkAndTonerFinder": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "InkAndTonerFinder",
+      "$componentTitle": "Ink & Toner Finder",
+      "title": "Ink & Toner Finder",
+      "description": "Helps shoppers find ink and toner by printer brand, product line, model, or free-text search.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "default": "Ink & Toner Finder"
+        },
+        "selectSectionTitle": {
+          "type": "string",
+          "title": "Select section title",
+          "default": "Select by Printer Brand & Model"
+        },
+        "searchSectionTitle": {
+          "type": "string",
+          "title": "Search section title",
+          "default": "Search by Printer Model"
+        },
+        "manufacturerLabel": {
+          "type": "string",
+          "title": "Manufacturer label",
+          "default": "Printer manufacturer"
+        },
+        "productLineLabel": {
+          "type": "string",
+          "title": "Product line label",
+          "default": "Product Line"
+        },
+        "modelLabel": {
+          "type": "string",
+          "title": "Model label",
+          "default": "Model"
+        },
+        "manufacturerPlaceholder": {
+          "type": "string",
+          "title": "Manufacturer placeholder",
+          "default": "Select manufacturer"
+        },
+        "productLinePlaceholder": {
+          "type": "string",
+          "title": "Product line placeholder",
+          "default": "Select product line"
+        },
+        "modelPlaceholder": {
+          "type": "string",
+          "title": "Model placeholder",
+          "default": "Select model"
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "title": "Search placeholder",
+          "default": "Enter the printer model. Ex.: M455dn, C230"
+        },
+        "searchButtonLabel": {
+          "type": "string",
+          "title": "Search button label",
+          "default": "Search"
+        },
+        "dividerLabel": {
+          "type": "string",
+          "title": "Divider label",
+          "default": "or"
+        },
+        "footerText": {
+          "type": "string",
+          "title": "Footer text",
+          "default": "If you can't find what you're looking for, please contact"
+        },
+        "customerServiceLink": {
+          "title": "Customer service link",
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "title": "URL",
+              "default": "/support"
+            },
+            "text": {
+              "type": "string",
+              "title": "Link text",
+              "default": "customer service"
+            }
+          }
+        },
+        "manufacturerFacetKey": {
+          "type": "string",
+          "title": "Manufacturer facet key",
+          "description": "Optional VTEX search facet key for the selected manufacturer."
+        },
+        "productLineFacetKey": {
+          "type": "string",
+          "title": "Product line facet key",
+          "description": "Optional VTEX search facet key for the selected product line."
+        },
+        "modelFacetKey": {
+          "type": "string",
+          "title": "Model facet key",
+          "description": "Optional VTEX search facet key for the selected model."
+        },
+        "manufacturers": {
+          "title": "Manufacturers",
+          "description": "Leave empty to use the default manufacturer list.",
+          "type": "array",
+          "items": {
+            "title": "Manufacturer",
+            "type": "object",
+            "required": [
+              "label",
+              "value",
+              "productLines"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "title": "Label"
+              },
+              "value": {
+                "type": "string",
+                "title": "Value"
+              },
+              "productLines": {
+                "title": "Product lines",
+                "type": "array",
+                "items": {
+                  "title": "Product line",
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "value",
+                    "models"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "title": "Label"
+                    },
+                    "value": {
+                      "type": "string",
+                      "title": "Value"
+                    },
+                    "models": {
+                      "title": "Models",
+                      "type": "array",
+                      "items": {
+                        "title": "Model",
+                        "type": "object",
+                        "required": [
+                          "label",
+                          "value"
+                        ],
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "title": "Label"
+                          },
+                          "value": {
+                            "type": "string",
+                            "title": "Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "InstagramFeed": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "InstagramFeed",
+      "$componentTitle": "Instagram Feed",
+      "title": "Instagram Feed",
+      "description": "GET INSPIRED section — editorial image grid with Instagram links",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "title": {
+          "title": "Section title",
+          "type": "string",
+          "default": "Get Inspired"
+        },
+        "subtitle": {
+          "title": "Subtitle",
+          "type": "string",
+          "default": ""
+        },
+        "image1": {
+          "title": "Image 1 (required)",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Alt text",
+              "type": "string",
+              "default": ""
+            },
+            "instagramUrl": {
+              "title": "Instagram URL",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "image2": {
+          "title": "Image 2 (required)",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Alt text",
+              "type": "string",
+              "default": ""
+            },
+            "instagramUrl": {
+              "title": "Instagram URL",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "image3": {
+          "title": "Image 3 (required)",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Alt text",
+              "type": "string",
+              "default": ""
+            },
+            "instagramUrl": {
+              "title": "Instagram URL",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "image4": {
+          "title": "Image 4 (optional)",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Alt text",
+              "type": "string",
+              "default": ""
+            },
+            "instagramUrl": {
+              "title": "Instagram URL",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "image5": {
+          "title": "Image 5 (optional)",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Alt text",
+              "type": "string",
+              "default": ""
+            },
+            "instagramUrl": {
+              "title": "Instagram URL",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "image6": {
+          "title": "Image 6 (optional)",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Alt text",
+              "type": "string",
+              "default": ""
+            },
+            "instagramUrl": {
+              "title": "Instagram URL",
+              "type": "string",
+              "default": ""
+            }
+          }
+        }
+      }
+    },
+    "LookbookGrid": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "LookbookGrid",
+      "$componentTitle": "Lookbook Grid",
+      "title": "Lookbook Grid",
+      "description": "3 editorial cells side by side — image, title, subtitle and CTA link per cell",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "textPosition": {
+          "title": "Text position (all cells)",
+          "type": "string",
+          "enumNames": [
+            "Top left",
+            "Top center",
+            "Top right",
+            "Bottom left",
+            "Bottom center",
+            "Bottom right"
+          ],
+          "enum": [
+            "top-left",
+            "top-center",
+            "top-right",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ],
+          "default": "bottom-left"
+        },
+        "textColor": {
+          "title": "Text color (all cells)",
+          "type": "string",
+          "enumNames": [
+            "White",
+            "Black"
+          ],
+          "enum": [
+            "white",
+            "black"
+          ],
+          "default": "white"
+        },
+        "cell1": {
+          "title": "Cell 1",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Image alt text",
+              "type": "string",
+              "default": ""
+            },
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": ""
+            },
+            "subtitle": {
+              "title": "Subtitle",
+              "type": "string",
+              "default": ""
+            },
+            "linkUrl": {
+              "title": "Link URL",
+              "type": "string",
+              "default": ""
+            },
+            "linkLabel": {
+              "title": "CTA button text",
+              "type": "string",
+              "default": "Discover"
+            }
+          }
+        },
+        "cell2": {
+          "title": "Cell 2",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Image alt text",
+              "type": "string",
+              "default": ""
+            },
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": ""
+            },
+            "subtitle": {
+              "title": "Subtitle",
+              "type": "string",
+              "default": ""
+            },
+            "linkUrl": {
+              "title": "Link URL",
+              "type": "string",
+              "default": ""
+            },
+            "linkLabel": {
+              "title": "CTA button text",
+              "type": "string",
+              "default": "Explore"
+            }
+          }
+        },
+        "cell3": {
+          "title": "Cell 3",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Image",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Image alt text",
+              "type": "string",
+              "default": ""
+            },
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": ""
+            },
+            "subtitle": {
+              "title": "Subtitle",
+              "type": "string",
+              "default": ""
+            },
+            "linkUrl": {
+              "title": "Link URL",
+              "type": "string",
+              "default": ""
+            },
+            "linkLabel": {
+              "title": "CTA button text",
+              "type": "string",
+              "default": "View all"
+            }
+          }
+        }
+      }
+    },
+    "MegaMenu": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "MegaMenu",
+      "$componentTitle": "Mega Menu",
+      "title": "Mega Menu",
+      "description": "Category mega menu fed by catalog categories. Select which departments to show and optionally add custom links.",
+      "type": "object",
+      "properties": {
+        "viewAllLabel": {
+          "type": "string",
+          "title": "View all label",
+          "default": "View all"
+        },
+        "includeUnlistedDepartments": {
+          "type": "boolean",
+          "title": "Also show departments not listed below",
+          "default": false
+        },
+        "items": {
+          "title": "Menu items",
+          "description": "Leave empty to show all root categories from the catalog. Use categorySlug to pull a live category (and its subcategories). Use label + url for custom entries.",
+          "type": "array",
+          "items": {
+            "title": "Menu item",
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "title": "Label",
+                "description": "Optional. For categories, defaults to the catalog name."
+              },
+              "categorySlug": {
+                "type": "string",
+                "title": "Category slug",
+                "description": "Catalog slug, e.g. office or office/paper. Pulls that category and its children."
+              },
+              "url": {
+                "type": "string",
+                "title": "Custom URL",
+                "description": "Used when this item is not a catalog category (or as fallback)."
+              },
+              "showSubcategories": {
+                "type": "boolean",
+                "title": "Show catalog subcategories",
+                "default": true
+              },
+              "extraLinks": {
+                "title": "Extra links in panel",
+                "type": "array",
+                "items": {
+                  "title": "Link",
+                  "type": "object",
+                  "required": [
+                    "text",
+                    "url"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "title": "Text"
+                    },
+                    "url": {
+                      "type": "string",
+                      "title": "URL"
+                    }
+                  }
+                }
+              },
+              "children": {
+                "title": "Custom children",
+                "description": "Additional manual child links (appended after catalog subcategories).",
+                "type": "array",
+                "items": {
+                  "title": "Child link",
+                  "type": "object",
+                  "required": [
+                    "text",
+                    "url"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "title": "Text"
+                    },
+                    "url": {
+                      "type": "string",
+                      "title": "URL"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "PullQuote": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PullQuote",
+      "$componentTitle": "Pull Quote",
+      "title": "Pull Quote",
+      "description": "Large editorial pull quote with optional attribution. Backgrounds: white, navy, red, gold",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "quote": {
+          "title": "Quote text",
+          "type": "string"
+        },
+        "attribution": {
+          "title": "Attribution name (optional, e.g. Thomas Müller)",
+          "type": "string",
+          "default": ""
+        },
+        "role": {
+          "title": "Role (optional, e.g. FC Bayern Midfielder)",
+          "type": "string",
+          "default": ""
+        },
+        "backgroundColor": {
+          "title": "Background color (white / navy / red / gold)",
+          "type": "string",
+          "default": "white"
+        },
+        "size": {
+          "title": "Quote size (default / large)",
+          "type": "string",
+          "default": "default"
+        }
+      }
+    },
+    "RelatedArticles": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "RelatedArticles",
+      "$componentTitle": "Related Articles",
+      "title": "Related Articles",
+      "description": "3 editorial article cards with image, tag, and title",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "sectionTitle": {
+          "title": "Section title",
+          "type": "string",
+          "default": "Related Articles"
+        },
+        "articles": {
+          "title": "Articles (max 3)",
+          "type": "array",
+          "items": {
+            "title": "Article",
+            "type": "object",
+            "properties": {
+              "image": {
+                "title": "Cover image",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageAlt": {
+                "title": "Image alt text",
+                "type": "string",
+                "default": ""
+              },
+              "tag": {
+                "title": "Tag (e.g. Interview, Match Report)",
+                "type": "string",
+                "default": ""
+              },
+              "title": {
+                "title": "Article title",
+                "type": "string"
+              },
+              "url": {
+                "title": "Article URL",
+                "type": "string",
+                "default": "/"
+              }
+            }
+          }
+        }
+      }
+    },
+    "RichTextBlock": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "RichTextBlock",
+      "$componentTitle": "Rich Text Block",
+      "title": "Rich Text Block",
+      "description": "Editorial text with optional subtitle per section. Body uses the native Content Platform rich text editor.",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "layout": {
+          "title": "Layout (centered / left / two-columns)",
+          "type": "string",
+          "default": "centered"
+        },
+        "dropCap": {
+          "title": "Drop cap on first paragraph",
+          "type": "boolean",
+          "default": false
+        },
+        "sections": {
+          "title": "Text sections",
+          "type": "array",
+          "items": {
+            "title": "Section",
+            "type": "object",
+            "properties": {
+              "subtitle": {
+                "title": "Subtitle (optional — red uppercase heading)",
+                "type": "string",
+                "default": ""
+              },
+              "body": {
+                "title": "Body text",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "draftjs-rich-text"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SizeGuide": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "SizeGuide",
+      "$componentTitle": "Size Guide",
+      "title": "Size Guide",
+      "description": "Size guide modal injected on the product page — configure the size chart rows",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "rows": {
+          "title": "Size chart rows",
+          "type": "array",
+          "items": {
+            "title": "Row",
+            "type": "object",
+            "properties": {
+              "size": {
+                "title": "Size (e.g. S, M, L, XL)",
+                "type": "string"
+              },
+              "chest": {
+                "title": "Chest (cm)",
+                "type": "string"
+              },
+              "waist": {
+                "title": "Waist (cm)",
+                "type": "string"
+              },
+              "hips": {
+                "title": "Hips (cm)",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Spacer": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Spacer",
+      "$componentTitle": "Spacer",
+      "title": "Spacer",
+      "description": "Full-width vertical spacer with configurable height and background color",
+      "type": "object",
+      "properties": {
+        "height": {
+          "title": "Height (pixels)",
+          "description": "Vertical height of the spacer in pixels (e.g. 40, 80, 120)",
+          "type": "integer",
+          "default": 40
+        },
+        "backgroundColor": {
+          "title": "Background color",
+          "description": "white / navy / red / gold / light-grey",
+          "type": "string",
+          "default": "white"
+        }
+      }
+    },
+    "StatsBlock": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "StatsBlock",
+      "$componentTitle": "Stats Block",
+      "title": "Stats Block",
+      "description": "3–4 key statistics displayed in large numbers — ideal for brand content pages",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "title": {
+          "title": "Section label (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "backgroundColor": {
+          "title": "Background color (navy / red / white)",
+          "type": "string",
+          "default": "navy"
+        },
+        "animateCount": {
+          "title": "Animate numbers on scroll",
+          "type": "boolean",
+          "default": true
+        },
+        "stats": {
+          "title": "Statistics",
+          "type": "array",
+          "items": {
+            "title": "Stat",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "Number / Value (e.g. 36, 2.5, 75)",
+                "type": "string"
+              },
+              "suffix": {
+                "title": "Suffix (optional, e.g. +, M, %)",
+                "type": "string",
+                "default": ""
+              },
+              "label": {
+                "title": "Label (e.g. Bundesliga titles)",
+                "type": "string"
+              },
+              "valueStyle": {
+                "title": "Number style (bold / italic / normal)",
+                "type": "string",
+                "default": "bold"
+              },
+              "labelStyle": {
+                "title": "Label style (normal / bold / italic)",
+                "type": "string",
+                "default": "normal"
+              }
+            }
+          }
+        }
+      }
+    },
+    "VideoBlock": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "VideoBlock",
+      "$componentTitle": "Video Block",
+      "title": "Video Block",
+      "description": "Embed a YouTube video or an MP4 file. Pick a video from VTEX Media or paste an external URL.",
+      "type": "object",
+      "properties": {
+        "sectionTitle": {
+          "title": "Section title (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "videoUrl": {
+          "title": "Video (from VTEX Media)",
+          "description": "Pick a video from the media library. Videos in VTEX are referenced by URL (typically YouTube).",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery"
+          }
+        },
+        "videoUrlExternal": {
+          "title": "Or external video URL",
+          "description": "Alternative — paste a YouTube URL (youtube.com/watch?v=... or youtu.be/...) or a direct .mp4/.webm/.mov file URL",
+          "type": "string",
+          "default": ""
+        },
+        "posterImage": {
+          "title": "Poster image (optional)",
+          "description": "Preview image shown before the video plays. Click triggers playback.",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "posterAlt": {
+          "title": "Poster image alt text",
+          "type": "string",
+          "default": ""
+        },
+        "aspectRatio": {
+          "title": "Aspect ratio",
+          "description": "16:9 (default) / 4:3 / 1:1 (square) / 9:16 (vertical, mobile-style)",
+          "type": "string",
+          "default": "16:9"
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "description": "Auto-start playback (videos will be muted, browser policy)",
+          "type": "boolean",
+          "default": false
+        },
+        "loop": {
+          "title": "Loop",
+          "description": "Replay automatically when the video ends",
+          "type": "boolean",
+          "default": false
+        },
+        "controls": {
+          "title": "Show player controls",
+          "type": "boolean",
+          "default": true
+        },
+        "fullWidth": {
+          "title": "Full-width (edge to edge)",
+          "description": "If enabled, the video spans the entire screen width with no padding",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "$defs": {},
+  "content-types": {
+    "404": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Error 404",
+      "properties": {
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    },
+    "500": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Error 500",
+      "properties": {
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    },
+    "globalFooterSections": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Global Footer Sections",
+      "properties": {
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    },
+    "globalHeaderSections": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Global Header Sections",
+      "properties": {
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    },
+    "globalSections": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Global Sections",
+      "properties": {
+        "regionalization": {
+          "title": "Regionalization",
+          "description": "Regionalization options",
+          "type": "object",
+          "properties": {
+            "inputField": {
+              "title": "Postal Code Input Field",
+              "type": "object",
+              "properties": {
+                "label": {
+                  "title": "Label",
+                  "type": "string",
+                  "default": "Postal Code"
+                },
+                "errorMessage": {
+                  "title": "Error message",
+                  "type": "string",
+                  "default": "You entered an invalid Postal Code"
+                },
+                "noProductsAvailableErrorMessage": {
+                  "title": "Error message for the scenario of no products available for a given location",
+                  "type": "string",
+                  "default": "There are no products available for %s.",
+                  "description": "The '%s' will be replaced by the postal code value."
+                },
+                "buttonActionText": {
+                  "title": "Action label to apply the postal code",
+                  "type": "string",
+                  "default": "Apply"
+                },
+                "errorMessageHelper": {
+                  "title": "Error message helper",
+                  "type": "string",
+                  "default": "Try using a different postal code.",
+                  "description": "This message will guide user in case of an error."
+                },
+                "loadingLabel": {
+                  "title": "Loading Label",
+                  "type": "string",
+                  "default": "..."
+                }
+              }
+            },
+            "idkPostalCodeLink": {
+              "title": "I don't know my postal code link",
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "title": "Link Text",
+                  "default": "I don't know my Postal Code"
+                },
+                "to": {
+                  "type": "string",
+                  "title": "Action link"
+                },
+                "icon": {
+                  "title": "Icon",
+                  "type": "object",
+                  "properties": {
+                    "icon": {
+                      "title": "Icon",
+                      "type": "string",
+                      "enumNames": [
+                        "Arrow Square Out"
+                      ],
+                      "enum": [
+                        "ArrowSquareOut"
+                      ],
+                      "default": "ArrowSquareOut"
+                    },
+                    "alt": {
+                      "title": "Alternative Label",
+                      "type": "string",
+                      "default": "Arrow Square Out icon"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "$componentTitle": "Regionalization"
+        },
+        "deliveryPromise": {
+          "title": "Delivery Promise",
+          "description": "Delivery Promise configurations",
+          "type": "object",
+          "properties": {
+            "deliveryMethods": {
+              "title": "PLP/Search Filter: Delivery Methods",
+              "type": "object",
+              "required": [
+                "title",
+                "description"
+              ],
+              "properties": {
+                "title": {
+                  "title": "Title",
+                  "type": "string",
+                  "default": "Delivery Methods"
+                },
+                "description": {
+                  "title": "Description",
+                  "type": "string",
+                  "default": "Offers and availability vary by location."
+                },
+                "setLocationButtonLabel": {
+                  "title": "Call to Action label",
+                  "type": "string",
+                  "default": "Set Location"
+                },
+                "allDeliveryMethods": {
+                  "title": "All delivery methods label",
+                  "type": "string",
+                  "default": "All delivery methods"
+                },
+                "delivery": {
+                  "title": "Shipping label",
+                  "type": "string",
+                  "default": "Shipping to"
+                },
+                "pickupInPoint": {
+                  "title": "Pickup in point label",
+                  "type": "string",
+                  "default": "Pickup at"
+                },
+                "pickupNearby": {
+                  "title": "Pickup Nearby label",
+                  "type": "string",
+                  "default": "Pickup Nearby"
+                },
+                "pickupAll": {
+                  "title": "Pickup All",
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "title": "Display pickup all filter",
+                      "description": "Display the pickup all filter in the PLP/Search page. This is recommended only for B2B stores.",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "label": {
+                      "title": "Label",
+                      "type": "string",
+                      "default": "Pickup Anywhere"
+                    }
+                  }
+                }
+              }
+            },
+            "regionSlider": {
+              "title": "RegionSlider SlideOver",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "title": "RegionSlider title",
+                  "type": "object",
+                  "properties": {
+                    "setLocation": {
+                      "title": "Set Location title",
+                      "type": "string",
+                      "default": "Set Location"
+                    },
+                    "changeLocation": {
+                      "title": "Change Postal Code title",
+                      "type": "string",
+                      "default": "Change Location"
+                    },
+                    "changePickupPoint": {
+                      "title": "Change Pickup Point location title",
+                      "type": "string",
+                      "default": "Change Store"
+                    },
+                    "globalChangePickupPoint": {
+                      "title": "Change Global Pickup Point location title",
+                      "type": "string",
+                      "default": "Change Store"
+                    }
+                  }
+                },
+                "pickupPointChangeApplyButtonLabel": {
+                  "title": "Change Pickup Point apply button label",
+                  "type": "string",
+                  "default": "Update"
+                },
+                "pickupPointClearFilterButtonLabel": {
+                  "title": "Clear Pickup Point filter button label",
+                  "type": "string",
+                  "default": "Clear filter"
+                },
+                "choosePickupPointAriaLabel": {
+                  "title": "Choose Pickup Point aria-label (radio group)",
+                  "type": "string",
+                  "default": "Choose a store"
+                },
+                "noPickupPointsAvailableInLocation": {
+                  "title": "No Pickup Point available near location message",
+                  "type": "string",
+                  "default": "No stores near location."
+                }
+              }
+            },
+            "filterByPickupPoint": {
+              "title": "Global Filter by Pickup Point",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "title": "Should enable global filter by pickup point?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "label": {
+                  "title": "Filter label",
+                  "type": "string",
+                  "default": "Filter by Store"
+                },
+                "icon": {
+                  "title": "Filter icon",
+                  "type": "object",
+                  "properties": {
+                    "icon": {
+                      "title": "Icon",
+                      "type": "string",
+                      "enumNames": [
+                        "Storefront"
+                      ],
+                      "enum": [
+                        "Storefront"
+                      ],
+                      "default": "Storefront"
+                    },
+                    "alt": {
+                      "title": "Alternative label",
+                      "type": "string",
+                      "default": "Storefront icon"
+                    }
+                  }
+                }
+              }
+            },
+            "deliveryOptions": {
+              "title": "PLP/Search Filter: Delivery Options",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "title": "Should enable Delivery Options?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "title": {
+                  "title": "Delivery Options title",
+                  "type": "string",
+                  "default": "Delivery Option"
+                },
+                "allDeliveryOptions": {
+                  "title": "All delivery options label",
+                  "type": "string",
+                  "default": "All delivery options"
+                }
+              }
+            },
+            "deliveryPromiseBadges": {
+              "title": "Delivery Promise badges",
+              "type": "object",
+              "description": "The badges will be displayed in product cards indicating the delivery methods availability for the product.",
+              "properties": {
+                "enabled": {
+                  "title": "Should display Delivery Promise badges?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "delivery": {
+                  "title": "Shipping available label",
+                  "type": "string",
+                  "default": "Available for shipping"
+                },
+                "deliveryUnavailable": {
+                  "title": "Shipping unavailable label",
+                  "type": "string",
+                  "default": "Unavailable for shipping"
+                },
+                "pickupInPoint": {
+                  "title": "Pickup available label",
+                  "type": "string",
+                  "default": "Available for pickup"
+                },
+                "pickupInPointUnavailable": {
+                  "title": "Pickup unavailable label",
+                  "type": "string",
+                  "default": "Unavailable for pickup"
+                }
+              }
+            },
+            "inStock": {
+              "title": "PLP/Search Filter: In Stock",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "title": "Should display In Stock filter?",
+                  "description": "Allow shoppers to filter only products that are currently in stock. Note: When enabling, ensure that the `hideUnavailableItems` property is set to `false` in the store's `discovery.config.js` file.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "title": {
+                  "title": "In Stock title",
+                  "type": "string",
+                  "default": "Availability"
+                },
+                "label": {
+                  "title": "In Stock label",
+                  "type": "string",
+                  "default": "In-stock only"
+                }
+              }
+            }
+          },
+          "$componentTitle": "Delivery Promise"
+        },
+        "filters": {
+          "title": "Filters",
+          "description": "Filter configurations for PLP/Search pages",
+          "type": "object",
+          "properties": {
+            "filterFacetRange": {
+              "title": "PLP/Search Filter: Range Facet",
+              "type": "object",
+              "properties": {
+                "minLabel": {
+                  "title": "Minimum value label",
+                  "type": "string",
+                  "default": "Min"
+                },
+                "maxLabel": {
+                  "title": "Maximum value label",
+                  "type": "string",
+                  "default": "Max"
+                },
+                "minPriceErrorMessage": {
+                  "title": "Error message for the minimum price input field",
+                  "type": "string",
+                  "default": "Min price can't be greater than max"
+                },
+                "maxPriceErrorMessage": {
+                  "title": "Error message for the maximum price input field",
+                  "type": "string",
+                  "default": "Max price can't be smaller than min"
+                }
+              }
+            }
+          },
+          "$componentTitle": "Filters"
+        },
+        "loading": {
+          "title": "Loading",
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Loading Label",
+              "description": "Default loading message label",
+              "type": "string",
+              "default": "Loading..."
+            }
+          },
+          "$componentTitle": "Loading"
+        },
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    },
+    "home": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Home",
+      "properties": {
+        "seo": {
+          "title": "SEO",
+          "description": "Search Engine Optimization options",
+          "type": "object",
+          "widget": {
+            "ui:ObjectFieldTemplate": "GoogleSeoPreview"
+          },
+          "required": [
+            "slug",
+            "title",
+            "description"
+          ],
+          "properties": {
+            "slug": {
+              "title": "Path",
+              "type": "string",
+              "default": "/"
+            },
+            "title": {
+              "title": "Default page title",
+              "description": "Display this title when no other tile is available",
+              "type": "string",
+              "default": "FastStore Starter"
+            },
+            "titleTemplate": {
+              "title": "Default page title template",
+              "description": "Template applied to the page title. Use %s to reference the page title.",
+              "type": "string",
+              "default": "%s | FastStore"
+            },
+            "description": {
+              "title": "Meta tag description",
+              "type": "string",
+              "default": "A beautifully designed store"
+            },
+            "canonical": {
+              "title": "Canonical url for the page",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "publisherId": {
+              "title": "Publisher ID",
+              "description": "A unique identifier used to reference the publisher. This can be a descriptive value (e.g., `#organization`) or a full URL (e.g., `https://example.com/publisher`).",
+              "type": "string"
+            },
+            "organization": {
+              "title": "Organization",
+              "type": "object",
+              "required": [
+                "name",
+                "url"
+              ],
+              "properties": {
+                "name": {
+                  "title": "Organization name",
+                  "type": "string",
+                  "default": "VTEX"
+                },
+                "legalName": {
+                  "title": "Organization legal name",
+                  "type": "string",
+                  "default": "VTEX Commerce"
+                },
+                "id": {
+                  "title": "Organization ID",
+                  "description": "A unique reference for the organization. This can be a descriptive value (e.g., #organization) or a full URL (e.g.,https://example.com/organization).",
+                  "type": "string"
+                },
+                "url": {
+                  "title": "Organization URL",
+                  "type": "string",
+                  "default": "https://vtex.com"
+                },
+                "sameAs": {
+                  "title": "Organization URLs",
+                  "type": "array",
+                  "description": "The URL of a page on another website with additional information about your organization. For example, a URL to your organization's profile page on a social media or review site.",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "logo": {
+                  "title": "Organization logo URL",
+                  "description": "A logo that is representative of your organization. Image guidelines: https://developers.google.com/search/docs/appearance/structured-data/organization",
+                  "type": "string"
+                },
+                "image": {
+                  "title": "Organization image/logo object",
+                  "description": "An image that is representative of your organization. Image guidelines: https://developers.google.com/search/docs/appearance/structured-data/organization",
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "title": "Organization image URL",
+                      "description": "The URL of the image. Make sure the url is crawlable and indexable.",
+                      "type": "string"
+                    },
+                    "caption": {
+                      "title": "Organization image caption",
+                      "description": "A short description of the image.",
+                      "type": "string"
+                    },
+                    "id": {
+                      "title": "Organization image ID",
+                      "description": "A unique reference for the image. This can be a descriptive value (e.g., #logo) or a full URL (e.g.,https://example.com/logo).",
+                      "type": "string"
+                    }
+                  }
+                },
+                "email": {
+                  "title": "Organization email",
+                  "description": "The email address to contact your business",
+                  "type": "string"
+                },
+                "telephone": {
+                  "title": "Organization phone",
+                  "description": "A business phone number. Be sure to include the country code and area code in the phone number.",
+                  "type": "string"
+                },
+                "address": {
+                  "title": "Organization address",
+                  "description": "The address (physical or mailing) of your organization, if applicable.",
+                  "type": "object",
+                  "properties": {
+                    "streetAddress": {
+                      "title": "Street Address",
+                      "description": "The full street address of your postal address.",
+                      "type": "string"
+                    },
+                    "addressLocality": {
+                      "title": "City",
+                      "description": "The city of your postal address.",
+                      "type": "string"
+                    },
+                    "addressCountry": {
+                      "title": "Country",
+                      "description": "The country of your postal address. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example 'BR','US'.",
+                      "type": "string"
+                    },
+                    "postalCode": {
+                      "title": "Postal Code",
+                      "description": "The postal code of your postal address.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "$componentTitle": "SEO"
+        },
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": [
+        "slug"
+      ]
+    },
+    "landingPage": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": false,
+      "type": "object",
+      "title": "Landing Page",
+      "properties": {
+        "slug": {
+          "type": "string",
+          "widget": {
+            "ui:widget": "slug"
+          },
+          "$componentTitle": "slug"
+        },
+        "siteMap": {
+          "title": "Public",
+          "description": "When enabled, this page's URL is added to sitemap.xml so search engines can discover and index it. Disable to keep the page out of the sitemap (e.g. for private, temporary, or campaign-only landing pages).",
+          "default": true,
+          "type": "boolean"
+        },
+        "seo": {
+          "title": "SEO",
+          "description": "Search Engine Optimization options",
+          "type": "object",
+          "widget": {
+            "ui:ObjectFieldTemplate": "GoogleSeoPreview"
+          },
+          "required": [
+            "slug",
+            "title",
+            "description"
+          ],
+          "properties": {
+            "slug": {
+              "title": "Path",
+              "type": "string",
+              "default": "/"
+            },
+            "title": {
+              "title": "Default page title",
+              "description": "Display this title when no other tile is available.",
+              "type": "string",
+              "default": "FastStore Starter"
+            },
+            "titleTemplate": {
+              "title": "Default page title template",
+              "description": "Template applied to the page title. Use %s to reference the page title.",
+              "type": "string",
+              "default": "%s | FastStore"
+            },
+            "description": {
+              "title": "Meta tag description",
+              "type": "string",
+              "default": "A beautifully designed store"
+            },
+            "canonical": {
+              "title": "Canonical url for the page",
+              "type": "string"
+            }
+          },
+          "$componentTitle": "SEO"
+        },
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": [
+        "slug"
+      ]
+    },
+    "login": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Login",
+      "properties": {
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    },
+    "pdp": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": false,
+      "type": "object",
+      "title": "Product Page",
+      "properties": {
+        "template": {
+          "title": "Template",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "PDP template value (e.g. Slug: /apple-magic-mouse/p OR /department/category/subcategory/)",
+              "type": "string",
+              "description": "Possible values: the PDP slug template (e.g. '/apple-magic-mouse/p'); A PLP template (e.g. '/department/' OR '/department/category/' OR '/department/category/subcategory/'). If empty, this template will be the generic PDP."
+            }
+          },
+          "$componentTitle": "Template"
+        },
+        "seo": {
+          "title": "SEO",
+          "description": "Search Engine Optimization options",
+          "type": "object",
+          "widget": {
+            "ui:ObjectFieldTemplate": "GoogleSeoPreview"
+          },
+          "properties": {
+            "titleTemplate": {
+              "title": "PDP page title template",
+              "description": "Template applied to the page title. Use %s to reference the page title.",
+              "type": "string",
+              "default": "%s | FastStore PDP"
+            },
+            "id": {
+              "title": "ID",
+              "description": "A unique identifier used to reference the product page. This is a descriptive value (e.g., `#product`) that will be concatenated with the product path (example of the result: `/product-slug/p#product`).",
+              "type": "string"
+            },
+            "mainEntityOfPage": {
+              "title": "Main entity of page",
+              "description": "Indicates the main entity of the page. A unique identifier used to reference the product page. This is a descriptive value (e.g., `#webpage`) that will be concatenated with the product path (example of the result: `/product-slug/p#webpage`).",
+              "type": "string"
+            }
+          },
+          "$componentTitle": "SEO"
+        },
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": [
+        "slug"
+      ]
+    },
+    "plp": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": false,
+      "type": "object",
+      "title": "Product List Page",
+      "properties": {
+        "seo": {
+          "title": "SEO",
+          "description": "Search Engine Optimization options",
+          "type": "object",
+          "properties": {
+            "titleTemplate": {
+              "title": "PLP page title template",
+              "description": "Template applied to the page title. Use %s to reference the page title.",
+              "type": "string",
+              "default": "%s | FastStore PLP"
+            }
+          },
+          "$componentTitle": "SEO"
+        },
+        "template": {
+          "title": "Template",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "PLP template value (e.g. Slug: /department/category/subcategory)",
+              "type": "string",
+              "description": "PLP slug template (e.g. /office or /office/chairs) representing the /department/category/subcategory template). If this field is left empty, the generic PLP template will be applied."
+            }
+          },
+          "$componentTitle": "Template"
+        },
+        "productGallery": {
+          "title": "Product Gallery",
+          "description": "ProductGallery options",
+          "type": "object",
+          "required": [
+            "itemsPerPage",
+            "sortBySelection"
+          ],
+          "properties": {
+            "itemsPerPage": {
+              "title": "Number of ProductCards per page",
+              "type": "integer",
+              "default": 12
+            },
+            "sortBySelection": {
+              "title": "Default sort by value",
+              "type": "string",
+              "default": "score_desc",
+              "enumNames": [
+                "Price, descending",
+                "Price, ascending",
+                "Top sales",
+                "Name, A-Z",
+                "Name, Z-A",
+                "Release date",
+                "Discount",
+                "Relevance"
+              ],
+              "enum": [
+                "price_desc",
+                "price_asc",
+                "orders_desc",
+                "name_asc",
+                "name_desc",
+                "release_desc",
+                "discount_desc",
+                "score_desc"
+              ]
+            }
+          },
+          "$componentTitle": "Product Gallery"
+        },
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": [
+        "slug"
+      ]
+    },
+    "search": {
+      "$extends": [
+        "#/components/base-page-template"
+      ],
+      "$singleton": true,
+      "type": "object",
+      "title": "Search Page",
+      "properties": {
+        "seo": {
+          "title": "SEO",
+          "description": "Search Engine Optimization options",
+          "type": "object",
+          "properties": {
+            "titleTemplate": {
+              "title": "Default page title template",
+              "description": "Template applied to the page title. Use %s to reference the page title.",
+              "type": "string",
+              "default": "%s | Search results"
+            }
+          },
+          "$componentTitle": "SEO"
+        },
+        "productGallery": {
+          "title": "Product Gallery",
+          "description": "ProductGallery options",
+          "type": "object",
+          "required": [
+            "itemsPerPage",
+            "sortBySelection"
+          ],
+          "properties": {
+            "itemsPerPage": {
+              "title": "Number of ProductCards per page",
+              "type": "integer",
+              "default": 12
+            },
+            "sortBySelection": {
+              "title": "Default sort by value",
+              "type": "string",
+              "default": "score_desc",
+              "enumNames": [
+                "Price, descending",
+                "Price, ascending",
+                "Top sales",
+                "Name, A-Z",
+                "Name, Z-A",
+                "Release date",
+                "Discount",
+                "Relevance"
+              ],
+              "enum": [
+                "price_desc",
+                "price_asc",
+                "orders_desc",
+                "name_asc",
+                "name_desc",
+                "release_desc",
+                "discount_desc",
+                "score_desc"
+              ]
+            }
+          },
+          "$componentTitle": "Product Gallery"
+        },
+        "sections": {
+          "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false,
+      "identifierKeys": []
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "Spacer",
+  "$componentTitle": "Spacer",
+  "title": "Spacer",
+  "description": "Full-width vertical spacer with configurable height and background color",
+  "type": "object",
+  "properties": {
+    "height": {
+      "title": "Height (pixels)",
+      "description": "Vertical height of the spacer in pixels (e.g. 40, 80, 120)",
+      "type": "integer",
+      "default": 40
+    },
+    "backgroundColor": {
+      "title": "Background color",
+      "description": "white / navy / red / gold / light-grey",
+      "type": "string",
+      "default": "white"
+    }
+  }
+}

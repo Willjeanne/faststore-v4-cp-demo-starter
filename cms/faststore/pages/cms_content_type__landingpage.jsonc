@@ -1,0 +1,69 @@
+{
+  "landingPage": {
+    "$extends": ["#/components/base-page-template"],
+    "$singleton": false,
+    "type": "object",
+    "title": "Landing Page",
+    "properties": {
+      "slug": {
+        "type": "string",
+        "widget": {
+          "ui:widget": "slug"
+        },
+        "$componentTitle": "slug"
+      },
+      "siteMap": {
+        "title": "Public",
+        "description": "When enabled, this page's URL is added to sitemap.xml so search engines can discover and index it. Disable to keep the page out of the sitemap (e.g. for private, temporary, or campaign-only landing pages).",
+        "default": true,
+        "type": "boolean"
+      },
+      "seo": {
+        "title": "SEO",
+        "description": "Search Engine Optimization options",
+        "type": "object",
+        "widget": {
+          "ui:ObjectFieldTemplate": "GoogleSeoPreview"
+        },
+        "required": ["slug", "title", "description"],
+        "properties": {
+          "slug": {
+            "title": "Path",
+            "type": "string",
+            "default": "/"
+          },
+          "title": {
+            "title": "Default page title",
+            "description": "Display this title when no other tile is available.",
+            "type": "string",
+            "default": "FastStore Starter"
+          },
+          "titleTemplate": {
+            "title": "Default page title template",
+            "description": "Template applied to the page title. Use %s to reference the page title.",
+            "type": "string",
+            "default": "%s | FastStore"
+          },
+          "description": {
+            "title": "Meta tag description",
+            "type": "string",
+            "default": "A beautifully designed store"
+          },
+          "canonical": {
+            "title": "Canonical url for the page",
+            "type": "string"
+          }
+        },
+        "$componentTitle": "SEO"
+      },
+      "sections": {
+        "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+      }
+    },
+    "readOnly": false,
+    "writeOnly": false,
+    "deprecated": false,
+    "$abstract": false,
+    "identifierKeys": ["slug"]
+  }
+}

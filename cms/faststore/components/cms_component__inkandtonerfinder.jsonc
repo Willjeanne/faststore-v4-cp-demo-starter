@@ -1,0 +1,168 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "InkAndTonerFinder",
+  "$componentTitle": "Ink & Toner Finder",
+  "title": "Ink & Toner Finder",
+  "description": "Helps shoppers find ink and toner by printer brand, product line, model, or free-text search.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title",
+      "default": "Ink & Toner Finder"
+    },
+    "selectSectionTitle": {
+      "type": "string",
+      "title": "Select section title",
+      "default": "Select by Printer Brand & Model"
+    },
+    "searchSectionTitle": {
+      "type": "string",
+      "title": "Search section title",
+      "default": "Search by Printer Model"
+    },
+    "manufacturerLabel": {
+      "type": "string",
+      "title": "Manufacturer label",
+      "default": "Printer manufacturer"
+    },
+    "productLineLabel": {
+      "type": "string",
+      "title": "Product line label",
+      "default": "Product Line"
+    },
+    "modelLabel": {
+      "type": "string",
+      "title": "Model label",
+      "default": "Model"
+    },
+    "manufacturerPlaceholder": {
+      "type": "string",
+      "title": "Manufacturer placeholder",
+      "default": "Select manufacturer"
+    },
+    "productLinePlaceholder": {
+      "type": "string",
+      "title": "Product line placeholder",
+      "default": "Select product line"
+    },
+    "modelPlaceholder": {
+      "type": "string",
+      "title": "Model placeholder",
+      "default": "Select model"
+    },
+    "searchPlaceholder": {
+      "type": "string",
+      "title": "Search placeholder",
+      "default": "Enter the printer model. Ex.: M455dn, C230"
+    },
+    "searchButtonLabel": {
+      "type": "string",
+      "title": "Search button label",
+      "default": "Search"
+    },
+    "dividerLabel": {
+      "type": "string",
+      "title": "Divider label",
+      "default": "or"
+    },
+    "footerText": {
+      "type": "string",
+      "title": "Footer text",
+      "default": "If you can't find what you're looking for, please contact"
+    },
+    "customerServiceLink": {
+      "title": "Customer service link",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL",
+          "default": "/support"
+        },
+        "text": {
+          "type": "string",
+          "title": "Link text",
+          "default": "customer service"
+        }
+      }
+    },
+    "manufacturerFacetKey": {
+      "type": "string",
+      "title": "Manufacturer facet key",
+      "description": "Optional VTEX search facet key for the selected manufacturer."
+    },
+    "productLineFacetKey": {
+      "type": "string",
+      "title": "Product line facet key",
+      "description": "Optional VTEX search facet key for the selected product line."
+    },
+    "modelFacetKey": {
+      "type": "string",
+      "title": "Model facet key",
+      "description": "Optional VTEX search facet key for the selected model."
+    },
+    "manufacturers": {
+      "title": "Manufacturers",
+      "description": "Leave empty to use the default manufacturer list.",
+      "type": "array",
+      "items": {
+        "title": "Manufacturer",
+        "type": "object",
+        "required": ["label", "value", "productLines"],
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "productLines": {
+            "title": "Product lines",
+            "type": "array",
+            "items": {
+              "title": "Product line",
+              "type": "object",
+              "required": ["label", "value", "models"],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "title": "Label"
+                },
+                "value": {
+                  "type": "string",
+                  "title": "Value"
+                },
+                "models": {
+                  "title": "Models",
+                  "type": "array",
+                  "items": {
+                    "title": "Model",
+                    "type": "object",
+                    "required": ["label", "value"],
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "title": "Label"
+                      },
+                      "value": {
+                        "type": "string",
+                        "title": "Value"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

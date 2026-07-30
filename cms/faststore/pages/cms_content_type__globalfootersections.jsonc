@@ -1,0 +1,18 @@
+{
+  "globalFooterSections": {
+    "$extends": ["#/components/base-page-template"],
+    "$singleton": true,
+    "type": "object",
+    "title": "Global Footer Sections",
+    "properties": {
+      "sections": {
+        "$ref": "#/$defs/$ALLOW_ALL_COMPONENTS"
+      }
+    },
+    "readOnly": false,
+    "writeOnly": false,
+    "deprecated": false,
+    "$abstract": false,
+    "identifierKeys": []
+  }
+}

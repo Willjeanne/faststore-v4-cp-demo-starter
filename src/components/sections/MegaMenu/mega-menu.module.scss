@@ -1,0 +1,214 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+$demo-dark: #003a4d;
+$demo-gold: #ffcb05;
+$demo-panel: #f7fbfc;
+
+.megaMenu {
+  position: relative;
+  z-index: calc(var(--fs-z-index-high) - 1);
+  background-color: #ffffff;
+  border-bottom: 1px solid #d9e4e8;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+
+.mobileToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--fs-spacing-3) 0;
+  font-size: var(--fs-text-size-1);
+  font-weight: var(--fs-text-weight-bold);
+  color: $demo-dark;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  @include u.media(">=notebook") {
+    display: none;
+  }
+}
+
+.nav {
+  width: 100%;
+
+  @include u.media("<notebook") {
+    display: none;
+    padding-bottom: var(--fs-spacing-3);
+
+    &[data-fs-mega-menu-open="true"] {
+      display: block;
+    }
+  }
+}
+
+.loading {
+  display: block;
+  padding: var(--fs-spacing-2) 0;
+  color: #5b6f78;
+  font-size: var(--fs-text-size-1);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include u.media(">=notebook") {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--fs-spacing-1);
+    align-items: stretch;
+  }
+}
+
+.item {
+  position: relative;
+
+  @include u.media(">=notebook") {
+    &[data-fs-mega-menu-item-open="true"] {
+      .panel {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .caretButton {
+        color: $demo-dark;
+      }
+    }
+  }
+}
+
+.triggerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--fs-spacing-1);
+  min-height: 44px;
+  border-bottom: 1px solid #e6eef1;
+
+  @include u.media(">=notebook") {
+    border-bottom: 0;
+  }
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  flex: 1;
+  min-height: 44px;
+  padding: var(--fs-spacing-2) var(--fs-spacing-1);
+  color: $demo-dark;
+  font-size: var(--fs-text-size-1);
+  font-weight: var(--fs-text-weight-bold);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible {
+    color: $demo-dark;
+    text-decoration: underline;
+    text-decoration-color: $demo-gold;
+    text-underline-offset: 4px;
+  }
+}
+
+.caretButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: #5b6f78;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.panel {
+  display: none;
+  padding: 0 0 var(--fs-spacing-2) var(--fs-spacing-3);
+
+  &[data-fs-mega-menu-panel-open="true"] {
+    display: block;
+  }
+
+  @include u.media(">=notebook") {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    display: block;
+    min-width: 280px;
+    max-width: 420px;
+    padding: var(--fs-spacing-1) 0 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    &[data-fs-mega-menu-panel-open="true"] {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+}
+
+.panelInner {
+  padding: var(--fs-spacing-3);
+  background-color: $demo-panel;
+  border: 1px solid #d9e4e8;
+  border-radius: var(--fs-border-radius);
+  box-shadow: 0 10px 24px rgb(0 58 77 / 12%);
+}
+
+.viewAll {
+  display: inline-block;
+  margin-bottom: var(--fs-spacing-2);
+  color: $demo-dark;
+  font-size: var(--fs-text-size-0);
+  font-weight: var(--fs-text-weight-bold);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: $demo-gold;
+  }
+}
+
+.panelList {
+  display: grid;
+  gap: var(--fs-spacing-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include u.media(">=notebook") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 320px;
+  }
+}
+
+.panelLink {
+  display: block;
+  padding: var(--fs-spacing-1) 0;
+  color: #234652;
+  font-size: var(--fs-text-size-1);
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: $demo-dark;
+    text-decoration: underline;
+    text-decoration-color: $demo-gold;
+  }
+}

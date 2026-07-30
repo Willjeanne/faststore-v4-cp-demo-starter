@@ -1,0 +1,441 @@
+@use "@faststore/ui/src/styles/base/utilities" as u;
+
+$demo-dark: #003a4d;
+$demo-gold: #ffcb05;
+$demo-gold-hover: #ffc600;
+
+.demoNavbarShell {
+  // Literal value — avoid re-resolving through --fs-input-height on [data-fs-input].
+  --demo-search-height: 48px;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--fs-z-index-high);
+  background-color: $demo-dark;
+
+  [data-fs-search-input] {
+    // Keep dropdown positioning in sync with the fixed field height.
+    --fs-search-input-height-desktop: var(--demo-search-height);
+    --fs-search-dropdown-position-top-desktop: var(--demo-search-height);
+    --fs-search-dropdown-position-top-tablet: var(--demo-search-height);
+    --fs-search-dropdown-position-top-mobile: var(--demo-search-height);
+
+    align-self: center;
+    height: auto;
+    overflow: visible;
+  }
+
+  [data-fs-search-input-field-wrapper] {
+    height: var(--demo-search-height);
+  }
+
+  [data-fs-search-input-field] {
+    --fs-search-input-field-input-bkg-color: #ffffff;
+    --fs-search-input-field-height-mobile: var(--demo-search-height);
+    --fs-search-input-field-height-desktop: var(--demo-search-height);
+    --fs-search-input-field-button-min-height: var(--demo-search-height);
+    --fs-search-input-field-button-padding-top-desktop: 0;
+    --fs-search-input-field-button-padding-bottom-desktop: 0;
+
+    display: flex;
+    align-items: center;
+    height: var(--demo-search-height) !important;
+    min-height: var(--demo-search-height);
+    max-height: var(--demo-search-height);
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: var(--fs-border-radius);
+    box-shadow: none;
+
+    &:focus,
+    &:focus-visible,
+    &:hover:focus,
+    &:hover:focus-visible {
+      height: var(--demo-search-height) !important;
+      max-height: var(--demo-search-height);
+      box-shadow: none;
+    }
+
+    [data-fs-search-input-field-input] {
+      --fs-input-height: var(--demo-search-height);
+
+      box-sizing: border-box;
+      height: var(--demo-search-height) !important;
+      max-height: var(--demo-search-height);
+      min-height: 0;
+      border: 0;
+      border-radius: 0;
+      color: var(--fs-color-neutral-7);
+      background-color: transparent;
+      box-shadow: none;
+
+      &:focus,
+      &:focus-visible,
+      &:hover,
+      &:hover:focus,
+      &:hover:focus-visible {
+        height: var(--demo-search-height) !important;
+        border: 0;
+        box-shadow: none;
+      }
+
+      &::placeholder {
+        color: #888888;
+      }
+    }
+
+    [data-fs-search-input-field-actions] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      height: var(--demo-search-height);
+      min-height: 0;
+      max-height: var(--demo-search-height);
+    }
+
+    [data-fs-icon-button][data-fs-button-variant][data-fs-button-size="small"] {
+      --fs-button-height: var(--demo-search-height);
+      --fs-button-small-min-height: var(--demo-search-height);
+      --fs-control-tap-size: var(--demo-search-height);
+
+      width: var(--demo-search-height);
+      min-height: var(--demo-search-height);
+      height: var(--demo-search-height);
+      max-height: var(--demo-search-height);
+      padding: 0;
+      overflow: hidden;
+      border-radius: 0 var(--fs-border-radius) var(--fs-border-radius) 0;
+
+      [data-fs-button-wrapper] {
+        min-width: var(--demo-search-height);
+        width: 100%;
+        min-height: var(--demo-search-height);
+        height: 100%;
+        max-height: var(--demo-search-height);
+        padding: 0;
+        color: $demo-dark;
+        background-color: $demo-gold;
+        border-radius: 0 var(--fs-border-radius) var(--fs-border-radius) 0;
+
+        &:hover {
+          background-color: $demo-gold-hover;
+        }
+      }
+    }
+  }
+
+  // Open state: keep field height stable. Flatten corners only when dropdown has content.
+  [data-fs-search-input-dropdown-visible="true"]:has(
+      [data-fs-search-history],
+      [data-fs-search-top],
+      [data-fs-search-auto-complete],
+      [data-fs-search-products],
+      [data-fs-search-dropdown-loading-text]:not(:empty)
+    ) {
+    [data-fs-search-input-field] {
+      height: var(--demo-search-height) !important;
+      max-height: var(--demo-search-height);
+      border-radius: var(--fs-border-radius) var(--fs-border-radius) 0 0;
+    }
+
+    [data-fs-search-input-field-input] {
+      height: var(--demo-search-height) !important;
+      border-radius: 0;
+    }
+
+    [data-fs-icon-button][data-fs-button-variant][data-fs-button-size="small"],
+    [data-fs-icon-button][data-fs-button-variant][data-fs-button-size="small"]
+      [data-fs-button-wrapper] {
+      border-radius: 0 var(--fs-border-radius) 0 0;
+    }
+  }
+
+  [data-fs-search-dropdown] {
+    top: var(--demo-search-height);
+    z-index: 3;
+
+    // Empty loading <p> still mounts and paints a white strip under the field.
+    [data-fs-search-dropdown-loading-text]:empty {
+      display: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    // Hide the panel entirely when there's nothing useful to show.
+    &:not(
+        :has(
+          [data-fs-search-history],
+          [data-fs-search-top],
+          [data-fs-search-auto-complete],
+          [data-fs-search-products],
+          [data-fs-search-dropdown-loading-text]:not(:empty)
+        )
+      ) {
+      display: none !important;
+    }
+  }
+}
+
+.utilityBar {
+  background-color: $demo-dark;
+}
+
+.utilityBarInner {
+  display: flex;
+  gap: var(--fs-spacing-3);
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 2rem;
+  padding-top: var(--fs-spacing-1);
+  padding-bottom: var(--fs-spacing-1);
+  font-size: var(--fs-text-size-0);
+  font-weight: 300;
+  color: $demo-gold;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  span[aria-hidden="true"] {
+    opacity: 0.45;
+  }
+}
+
+.demoNavbar {
+  --fs-navbar-height-desktop: 7.75rem;
+  --fs-navbar-bkg-color: #{$demo-dark};
+  --fs-navbar-box-shadow: none;
+  --fs-navbar-links-bkg-color: #{$demo-dark};
+  --fs-navbar-links-list-border-left-color-notebook: transparent;
+  --fs-logo-width: 9.5rem;
+
+  background-color: $demo-dark !important;
+
+  @include u.media(">=notebook") {
+    height: auto;
+    margin-bottom: 0 !important;
+  }
+
+  &[data-fs-navbar],
+  [data-fs-navbar] {
+    position: relative;
+    background-color: $demo-dark !important;
+    box-shadow: none;
+  }
+
+  [data-fs-navbar-header] {
+    height: auto !important;
+    background-color: $demo-dark !important;
+    backdrop-filter: none;
+    border-bottom: 1px solid rgb(255 255 255 / 35%);
+
+    @include u.media(">=notebook") {
+      position: static;
+    }
+  }
+
+  [data-fs-navbar-row] {
+    @include u.media(">=notebook") {
+      position: static;
+      align-items: center;
+      grid-template-columns: auto minmax(18rem, 42rem);
+      gap: var(--fs-spacing-5);
+      max-width: var(--fs-grid-max-width);
+      padding: var(--fs-spacing-3) var(--fs-grid-padding);
+      margin: 0 auto;
+    }
+  }
+
+  [data-fs-navbar-logo] {
+    align-self: center;
+    height: auto;
+    border-inline-start: 0;
+
+    @include u.media(">=notebook") {
+      padding: 0;
+    }
+
+    [data-fs-logo] {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  [data-fs-search-input] {
+    @include u.media(">=notebook") {
+      align-self: center;
+      order: 0;
+      max-width: 42rem;
+    }
+  }
+
+  [data-fs-navbar-buttons] {
+    @include u.media(">=notebook") {
+      position: absolute;
+      z-index: 2;
+      top: auto;
+      bottom: 0;
+      right: max(
+        var(--fs-grid-padding),
+        calc((100% - var(--fs-grid-max-width)) / 2 + var(--fs-grid-padding))
+      );
+      display: flex;
+      align-items: center;
+      height: 3rem;
+      gap: var(--fs-spacing-4);
+    }
+
+    [data-fs-cart-toggle] {
+      [data-fs-button-wrapper] {
+        min-width: 5.5rem;
+        min-height: 2.75rem;
+        padding: 0 var(--fs-spacing-3);
+        color: $demo-dark;
+        background-color: #ffffff;
+        border-radius: var(--fs-border-radius);
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+
+      [data-fs-badge] {
+        color: #ffffff;
+        background-color: $demo-dark;
+      }
+    }
+  }
+
+  [data-fs-navbar-links] {
+    background-color: $demo-dark;
+    border-top: 0;
+
+    @include u.media(">=notebook") {
+      min-height: 3rem;
+      padding-right: 18rem;
+    }
+  }
+
+  [data-fs-navbar-links-wrapper] {
+    @include u.media(">=notebook") {
+      display: flex;
+      align-items: center;
+      max-width: var(--fs-grid-max-width);
+      min-height: 3rem;
+      padding: 0 var(--fs-grid-padding);
+      margin: 0 auto;
+    }
+
+    [data-fs-button][data-fs-button-variant="tertiary"] {
+      --fs-button-tertiary-text-color: #{$demo-gold};
+      --fs-button-tertiary-text-color-hover: #ffffff;
+      --fs-button-tertiary-text-color-active: #ffffff;
+      --fs-button-tertiary-bkg-color: transparent;
+      --fs-button-tertiary-bkg-color-hover: transparent;
+      --fs-button-tertiary-bkg-color-active: transparent;
+
+      [data-fs-button-wrapper] {
+        font-size: var(--fs-text-size-2);
+        font-weight: 600;
+        color: $demo-gold;
+
+        &:hover {
+          color: #ffffff;
+          text-decoration: underline;
+        }
+      }
+
+      [data-fs-button-icon],
+      [data-fs-icon] {
+        color: $demo-gold;
+      }
+
+      &:hover {
+        [data-fs-button-icon],
+        [data-fs-icon] {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  [data-fs-navbar-links-list] {
+    @include u.media(">=notebook") {
+      gap: var(--fs-spacing-5);
+      padding-left: 0;
+      margin-left: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    [data-fs-link] {
+      font-size: var(--fs-text-size-2);
+      font-weight: 600;
+      color: $demo-gold;
+      text-decoration: none;
+
+      &:hover {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  [data-fs-navbar-button-menu],
+  [data-fs-button-collapse] {
+    [data-fs-button-wrapper] {
+      color: $demo-gold;
+    }
+  }
+
+  [data-fs-localization-button] [data-fs-button-wrapper] {
+    color: $demo-gold;
+  }
+}
+
+.signInButton {
+  [data-fs-button-wrapper] {
+    min-height: auto;
+    padding: 0;
+    color: $demo-gold;
+    background: transparent;
+    border: 0;
+
+    &:hover {
+      background: transparent;
+      text-decoration: underline;
+    }
+  }
+
+  [data-fs-button-icon] {
+    color: $demo-gold;
+  }
+}
+
+.signInText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  color: $demo-gold;
+  text-align: left;
+
+  strong {
+    font-size: var(--fs-text-size-1);
+    font-weight: 700;
+  }
+
+  span {
+    font-size: var(--fs-text-size-0);
+    font-weight: 400;
+  }
+}

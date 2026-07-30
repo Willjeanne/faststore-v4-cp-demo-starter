@@ -1,0 +1,43 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "RichTextBlock",
+  "$componentTitle": "Rich Text Block",
+  "title": "Rich Text Block",
+  "description": "Editorial text with optional subtitle per section. Body uses the native Content Platform rich text editor.",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "layout": {
+      "title": "Layout (centered / left / two-columns)",
+      "type": "string",
+      "default": "centered"
+    },
+    "dropCap": {
+      "title": "Drop cap on first paragraph",
+      "type": "boolean",
+      "default": false
+    },
+    "sections": {
+      "title": "Text sections",
+      "type": "array",
+      "items": {
+        "title": "Section",
+        "type": "object",
+        "properties": {
+          "subtitle": {
+            "title": "Subtitle (optional — red uppercase heading)",
+            "type": "string",
+            "default": ""
+          },
+          "body": {
+            "title": "Body text",
+            "type": "string",
+            "widget": {
+              "ui:widget": "draftjs-rich-text"
+            }
+          }
+        }
+      }
+    }
+  }
+}

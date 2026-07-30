@@ -1,0 +1,92 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "BannerCarousel",
+  "$componentTitle": "Banner Carousel",
+  "title": "Banner Carousel",
+  "description": "Rotating promotional banners for the homepage",
+  "type": "object",
+  "required": ["banners"],
+  "properties": {
+    "infiniteMode": {
+      "title": "Infinite loop",
+      "type": "boolean",
+      "default": true
+    },
+    "autoplay": {
+      "title": "Autoplay",
+      "type": "boolean",
+      "default": true
+    },
+    "autoplayInterval": {
+      "title": "Autoplay interval (ms)",
+      "type": "integer",
+      "default": 6000,
+      "minimum": 3000
+    },
+    "banners": {
+      "title": "Banners",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Banner",
+        "type": "object",
+        "required": ["image"],
+        "properties": {
+          "image": {
+            "type": "object",
+            "title": "Image",
+            "required": ["src", "alt"],
+            "properties": {
+              "src": {
+                "type": "string",
+                "title": "Image",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"]
+                  }
+                }
+              },
+              "alt": {
+                "type": "string",
+                "title": "Alternative label"
+              }
+            }
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "subtitle": {
+            "type": "string",
+            "title": "Subtitle"
+          },
+          "ctaText": {
+            "type": "string",
+            "title": "Button text"
+          },
+          "link": {
+            "title": "Link",
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "title": "URL"
+              },
+              "linkTargetBlank": {
+                "type": "boolean",
+                "title": "Open link in new window?",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}
